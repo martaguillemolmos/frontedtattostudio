@@ -1,26 +1,14 @@
-import "./Header.css"
-import { LinkButton } from "./LinkButton/LinkButton";
+import "./Header.css";
+import { LinkButton } from "../LinkButton/LinkButton";
 
 export const Header = () => {
-
-    return (
-        <div className='headerDesign'>
-            <LinkButton
-                path={"/"}
-                title={"Home"}
-            />
-              <LinkButton
-                path={"/register"}
-                title={"Register"}
-            />
-            <LinkButton
-                path={"/login"}
-                title={"Login"}
-            />
-            <LinkButton
-                path={"/profile"}
-                title={"Profile"}
-            />
-        </div>
-    )
-}
+  return (
+    <div className="headerDesign">
+      <div className="headerText">
+        <LinkButton path={"/"} title={"Inicio"} />
+        <LinkButton path={"/login"} title={"Inicia sesión"} />
+        <LinkButton path={"/profile"} title={"Perfil"} />
+      </div>
+    </div>
+  );
+};

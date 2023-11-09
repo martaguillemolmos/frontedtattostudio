@@ -1,16 +1,17 @@
+.headerText {
+  height: 10vh;
+  width: 100vw;
 
-.headerDesign {
+  background-color: red;
 
-    height: 10vh;
-    width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
 
-    background-color: red;
+  color: white;
+  font-weight: bold;
+  gap: 1em;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    color: white;
-    font-weight: bold;
+  flex-wrap: nowrap;
 }
