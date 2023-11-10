@@ -9,6 +9,7 @@
     align-items: center;
 
     background-color: rgb(245, 245, 27);
+    gap: 1em;
 }
 
 .buttonSubmit {
@@ -17,7 +18,7 @@
     width: 8em;
 
     border-radius: 1em;
-    background-color: crimson;
+    background-color: rgb(20, 173, 220);
     color: white;
     font-weight: bolder;
 

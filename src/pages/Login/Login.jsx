@@ -60,7 +60,7 @@ export const Login = () => {
         functionProp={functionHandler}
         // onBlur={}
       />
-      <div className='buttonSubmit' onClick={logMe}>Log Me!</div>
+      <div className='buttonSubmit' onClick={logMe}>Iniciar sesión</div>
     </div>
   );
 };
