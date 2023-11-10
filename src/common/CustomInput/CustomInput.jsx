@@ -7,7 +7,7 @@ export const CustomInput = ({design, type, name, placeholder, functionProp}) => 
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={ (e) => functionProp(e)}
+        onChange={(e) => functionProp(e)}
          />
     )
 }
