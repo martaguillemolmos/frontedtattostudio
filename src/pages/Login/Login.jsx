@@ -1,8 +1,13 @@
+import { useState } from "react";
 import "./Login.css";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { useEffect, useState } from "react";
+import { logUser } from "../../services/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+
+    const navigate = useNavigate();
+
   // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
     email: "",
@@ -16,10 +21,25 @@ export const Login = () => {
     }));
   };
 
-  useEffect(() => {
-    console.log(credenciales);
-  }, [credenciales]);
+  const logMe = () => {
 
+    logUser(credenciales)
+        .then(
+            resultado => {
+                console.log(resultado)
+                //Aqui guardaría el token........
+
+                //Una vez guardado el token....nos vamos a home....
+                setTimeout(()=>{
+                    navigate("/");
+                },500);
+            }
+        )
+        .catch(error => {
+          console.log(error)
+        });
+
+  }
   return (
     <div className="loginDesign">
       <CustomInput
@@ -40,6 +60,7 @@ export const Login = () => {
         functionProp={functionHandler}
         // onBlur={}
       />
+      <div className='buttonSubmit' onClick={logMe}>Log Me!</div>
     </div>
   );
 };
