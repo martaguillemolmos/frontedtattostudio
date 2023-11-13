@@ -5,8 +5,8 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { validator } from "../../services/userful";
-import CustomAlert  from "../../common/Alert/CustomAlert";
 
+import CustomAlert  from "../../common/Alert/CustomAlert";
 
 
 export const Login = () => {
