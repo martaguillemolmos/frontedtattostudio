@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
+import { validator } from "../../services/userful";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -29,9 +30,12 @@ export const Login = () => {
 
   const errorCheck = (e) => {
     let error = "";
-    error = validator (e.target.name, e.target.value);
-    console.log(error)
-  }
+    error = validator(e.target.name, e.target.value);
+    setCredencialesError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }));
+  };
   const logMe = () => {
     logUser(credenciales)
       .then((resultado) => {
@@ -47,6 +51,12 @@ export const Login = () => {
         console.log(error);
       });
   };
+  const registerMe = () => {
+        setTimeout(() => {
+          navigate("/register");
+        }, 500);
+    
+  };
   return (
     <div className="loginDesign">
       <div className="inputCard">
@@ -57,7 +67,7 @@ export const Login = () => {
           placeholder={""}
           // value={}
           functionProp={functionHandler}
-          // onBlur={}
+          functionBlur={errorCheck}
         />
         <div>{credencialesError.emailError}</div>
         <CustomInput
@@ -74,6 +84,13 @@ export const Login = () => {
 
         <div className="buttonSubmit" onClick={logMe}>
           Iniciar sesión
+        </div>
+
+        <div className="newAccount">
+          <div>----------¿Eres nuevo?----------</div>
+          <div className="buttonSubmit" onClick={registerMe}>
+          Crea tu cuenta
+        </div>
         </div>
       </div>
     </div>
