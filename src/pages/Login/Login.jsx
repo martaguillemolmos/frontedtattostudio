@@ -1,17 +1,23 @@
-import { useState } from "react";
 import "./Login.css";
+
+import { useState } from "react";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
     email: "",
     password: "",
+  });
+
+  //Declaramos las credenciales que vamos a solicitar junto + Error.
+  const [credencialesError, setCredencialesError] = useState({
+    emailError: "",
+    passwordError: "",
   });
 
   const functionHandler = (e) => {
@@ -21,46 +27,55 @@ export const Login = () => {
     }));
   };
 
-  const logMe = () => {
-
-    logUser(credenciales)
-        .then(
-            resultado => {
-                console.log(resultado)
-                //Aqui guardaría el token........
-
-                //Una vez guardado el token....nos vamos a home....
-                setTimeout(()=>{
-                    navigate("/");
-                },500);
-            }
-        )
-        .catch(error => {
-          console.log(error)
-        });
-
+  const errorCheck = (e) => {
+    let error = "";
+    error = validator (e.target.name, e.target.value);
+    console.log(error)
   }
+  const logMe = () => {
+    logUser(credenciales)
+      .then((resultado) => {
+        console.log(resultado);
+        //Aqui guardaría el token........
+
+        //Una vez guardado el token....nos vamos a home....
+        setTimeout(() => {
+          navigate("/");
+        }, 500);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="loginDesign">
-      <CustomInput
-        design={"inputDesign"}
-        type={"email"}
-        name={"email"}
-        placeholder={""}
-        // value={}
-        functionProp={functionHandler}
-        // onBlur={}
-      />
-      <CustomInput
-        design={"inputDesign"}
-        type={"password"}
-        name={"password"}
-        placeholder={""}
-        // value={}
-        functionProp={functionHandler}
-        // onBlur={}
-      />
-      <div className='buttonSubmit' onClick={logMe}>Iniciar sesión</div>
+      <div className="inputCard">
+        <CustomInput
+          design={"inputDesign"}
+          type={"email"}
+          name={"email"}
+          placeholder={""}
+          // value={}
+          functionProp={functionHandler}
+          // onBlur={}
+        />
+        <div>{credencialesError.emailError}</div>
+        <CustomInput
+          design={"inputDesign"}
+          type={"password"}
+          name={"password"}
+          placeholder={""}
+          // value={}
+          functionProp={functionHandler}
+          autocomplete="on"
+          functionBlur={errorCheck}
+        />
+        <div>{credencialesError.passwordError}</div>
+
+        <div className="buttonSubmit" onClick={logMe}>
+          Iniciar sesión
+        </div>
+      </div>
     </div>
   );
 };

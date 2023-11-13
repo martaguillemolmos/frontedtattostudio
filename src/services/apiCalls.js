@@ -1,7 +1,7 @@
+import axios from "axios";
 
+//Login
 export const logUser = async (body) => {
-
-    console.log(body);
-
-    return "todo bien"
+    //Conectamos la API a la base de datos
+    return await axios.post (`http://localhost:4000/user/login`, body) 
 }
