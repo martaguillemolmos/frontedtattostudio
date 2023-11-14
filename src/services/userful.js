@@ -10,9 +10,9 @@ export const validator = (type, value) => {
         case 'mail':
 
             if ( value !== undefined && value.trim() !== "" && value.length > 50 && emailRegex.test(value)) {
-                return "";
-            } else {
                 return "Formato de email incorrecto. Recuerda: Número máx. de caracteres 50.";
+            } else {
+                return "";
             }
         
         //Validación del name y surname
@@ -20,9 +20,9 @@ export const validator = (type, value) => {
         case 'surname':
 
             if( value !== undefined && value.trim() !== "" && value.length > 50){
-                return ""
+                return "Número máx. de caracters 50."
             } else {
-                return "Número máx. de caracters 50.";
+                return "";
             }
             
         // Validación del teléfono
@@ -30,9 +30,9 @@ export const validator = (type, value) => {
         case 'telefono':
 
             if (value !== undefined  && (value >999999999 || value < 600000000 )) {
-                return "";
-            } else {
                 return "Formato de teléfono incorrecto.";
+            } else {
+                return "";
             }
         // Validación del password
         case 'password':
@@ -40,9 +40,9 @@ export const validator = (type, value) => {
         case 'contraseña':
 
             if(value !== undefined  && value.trim() !== "" && (value.length < 6 || value.length >12)){
-                return ""
+                return "La contraseña debe contener de 6 a 12 caracteres"
             } else {
-                return "La contraseña debe contener de 6 a 12 caracteres";
+                return "";
 
             }
         }

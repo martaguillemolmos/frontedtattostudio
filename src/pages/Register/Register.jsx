@@ -5,8 +5,11 @@ import CustomAlert from "../../common/Alert/CustomAlert";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 import { registerUser } from "../../services/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+ //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
+ const navigate = useNavigate();
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el register.
   const [registerData, setRegisterData] = useState({
@@ -54,25 +57,29 @@ export const Register = () => {
   };
 
 
-
   //Creamos createUser
   const createUser = () => {
     console.log("datos", registerData);
-    if (registerData.name !== "" && registerData.surname !== "" && registerData.phone !== "" && registerData.email !== "" && registerData.password !== ""){
+    if (registerDataError != ""){
         const data = {
             ...registerData,
             phone: parseInt(registerData.phone)
         }
+        
         registerUser(data).then((resultado => {
             console.log(resultado)
+            setTimeout(() => {
+              navigate("/login");
+            }, 500);
+
         }))
         .catch((error) => {
           if (error.response.status !== 200) {
-            console.log(error.response.data.message);
+            console.log(error.response);
             alertHandler({
               show: true,
               title: `Error ${error.response.status}`,
-              message: `${error.response.data.message}`,
+              message: `${error.response.data}`,
             });
          }
         });
