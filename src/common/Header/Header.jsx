@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, userData } from "../../pages/userSlice";
 import { useNavigate } from "react-router-dom";
 
+
 export const Header = () => {
   const navigate = useNavigate();
 
@@ -30,9 +31,9 @@ export const Header = () => {
         </>
          ) : (
         <>
-        <LinkButton path={"/profile"} title={"Perfil"} />
+        <LinkButton path={"/profile"} title={rdxCredentials.credentials.name} />
         <div onClick={logOutMe}>
-            <LinkButton path={"/"} title={"Perfil"} />  
+            <LinkButton path={"/"} title={"Cerrar sesión"} />  
           </div>
         </>
         )}

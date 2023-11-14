@@ -1,6 +1,6 @@
 import "./Login.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +10,8 @@ import CustomAlert  from "../../common/Alert/CustomAlert";
 
 //Importo Redux
 
-import { useDispatch } from "react-redux";  
-import { login } from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";  
+import { login, userData } from "../userSlice";
 
 export const Login = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
@@ -19,6 +19,8 @@ export const Login = () => {
 
   //Declaramos esta constante, que nos permitirá leer el contenido.
   const dispatch = useDispatch();
+
+  const rdxCredentials = useSelector(userData);
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
@@ -60,6 +62,15 @@ export const Login = () => {
       [e.target.name + "Error"]: error,
     }));
   };
+
+  useEffect(()=>{
+    //Comprobamos si ya hay un token almacenado en Redux
+        if(rdxCredentials?.credentials.token){
+          //Si ya contamos con un token, redirigimos al usuario a inicio.
+          navigate("/");
+        } 
+      },[rdxCredentials, navigate]);
+  
 
   //Declaramos la constante logMe para que, en caso de logearnos guarde el token y nos envíe al profile y por el contrario, nos muestre el error que nos impide hacerlo.
   const logMe = () => {
