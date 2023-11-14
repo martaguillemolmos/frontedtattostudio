@@ -8,10 +8,17 @@ import { validator } from "../../services/userful";
 
 import CustomAlert  from "../../common/Alert/CustomAlert";
 
+//Importo Redux
+
+import { useDispatch } from "react-redux";  
+import { login } from "../userSlice";
 
 export const Login = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
   const navigate = useNavigate();
+
+  //Declaramos esta constante, que nos permitirá leer el contenido.
+  const dispatch = useDispatch();
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
@@ -61,7 +68,9 @@ export const Login = () => {
       logUser(credenciales)
       .then((resultado) => {
         console.log(resultado);
-        //Aqui guardaría el token........
+        //Guardanos el token
+        dispatch(login({ credentials: resultado.data}))
+        //En este caso, utilizamos un resultado.data porque lo que estamos esperando que nos devuelva es un objeto. ¿? Está en userSlice.
 
         //Una vez guardado el token,nos dirigimos a profile.
         setTimeout(() => {
