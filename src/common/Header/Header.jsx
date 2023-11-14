@@ -26,8 +26,10 @@ export const Header = () => {
         {/* Estas vistas son las que podremos visualizar, dependiendo de si contamos con token. */}
         
         {!rdxCredentials?.credentials.token ? (
-        <>        
-        <LinkButton path={"/login"} title={"Inicia sesión"} />
+        <> 
+        <LinkButton path={"/register"} title={"Registrarte"} />
+        <LinkButton path={"/login"} title={"Iniciar sesión"} />
+
         </>
          ) : (
         <>

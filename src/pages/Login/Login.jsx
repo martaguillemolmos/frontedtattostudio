@@ -63,6 +63,7 @@ export const Login = () => {
     }));
   };
 
+  //Utilizamos este useEffect para que, en el caso que alguien ya se haya logeado, no pueda acceder a esta vista.
   useEffect(()=>{
     //Comprobamos si ya hay un token almacenado en Redux
         if(rdxCredentials?.credentials.token){
