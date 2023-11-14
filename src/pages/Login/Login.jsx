@@ -106,7 +106,6 @@ export const Login = () => {
         }, 500);
   };
 
-
   return (
     <div className="loginDesign">
       <CustomAlert

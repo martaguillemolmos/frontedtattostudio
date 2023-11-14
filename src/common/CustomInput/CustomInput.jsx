@@ -1,6 +1,6 @@
 import "./CustomInput.css"
 
-export const CustomInput = ({design, type, name, placeholder, functionProp, functionBlur}) => {
+export const CustomInput = ({design, type, name, placeholder, functionProp, functionBlur, min, max}) => {
     return (
         <input 
         className={design}
@@ -9,6 +9,8 @@ export const CustomInput = ({design, type, name, placeholder, functionProp, func
         placeholder={placeholder}
         onChange={(e) => functionProp(e)}
         onBlur={(e)=>functionBlur(e)}
+        min={min}
+        max={max}
          />
     )
 }
