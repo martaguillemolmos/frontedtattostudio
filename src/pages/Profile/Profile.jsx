@@ -109,7 +109,7 @@ export const Profile = () => {
       <CustomInput
         disabled={isEnabled}
         design={"inputDesign"}
-        type={"number"}
+        type={"tel"}
         name={"phone"}
         placeholder={""}
         min={600000000}
