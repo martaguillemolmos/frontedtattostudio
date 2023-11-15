@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 
 //Importamos las rutas
-import { profileUser } from "../../services/apiCalls";
+import { profileUser, updateUser } from "../../services/apiCalls";
 
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
@@ -63,9 +63,16 @@ export const Profile = () => {
   }, [rdxToken]);
  
   const sendData = () => {
-    console.log("aqui entra, que es el SendData")
-    console.log("encontramos el token",rdxToken.credentials.token)
-    console.log("este es el profile",profile)
+    console.log(profile)
+    const userId = profile.id;
+
+    updateUser (rdxToken.credentials.token, userId, profile)
+    .then (() =>{
+    console.log("Cambios enviado correctamente");
+    })
+    . catch((error) => {
+        console.log("Error al enviar", error)
+    })
     setTimeout(() => {
       setIsEnabled(true);
     }, 1000);
