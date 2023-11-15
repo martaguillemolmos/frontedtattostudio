@@ -57,7 +57,7 @@ export const Register = () => {
   };
 
 
-  //Creamos createUser
+  //Registrar nuevos usuarios.
   const createUser = () => {
     console.log("datos", registerData);
     if (registerDataError != ""){
@@ -128,7 +128,7 @@ export const Register = () => {
       <div>Teléfono</div>
       <CustomInput
         design={"inputDesign"}
-        type={"number"}
+        type={"tel"}
         name={"phone"}
         placeholder={""}
         min={600000000}

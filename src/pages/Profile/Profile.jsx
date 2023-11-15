@@ -14,6 +14,7 @@ import { validator } from "../../services/userful";
 export const Profile = () => {
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
+
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
     name: "",
@@ -30,6 +31,8 @@ export const Profile = () => {
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
+
+  const [originalProfile, setOriginalProfile] = useState(false);
 
   const functionHandler = (e) => {
     setProfile((prevState) => ({
@@ -53,32 +56,49 @@ export const Profile = () => {
       profileUser(rdxToken.credentials.token)
         .then((results) => {
           setProfile(results.data.data);
+          setOriginalProfile(results.data.data);
         })
         .catch((error) => {
           console.error(error);
         });
     }
   }, [rdxToken]);
- 
-  const sendData = () => {
-    console.log(profile)
-    const userId = profile.id;
 
-    updateUser (rdxToken.credentials.token, userId, profile)
-    .then (() =>{
-    console.log("Cambios enviado correctamente");
-    })
-    . catch((error) => {
-        console.log("Error al enviar", error)
-    })
-    setTimeout(() => {
+  //Guardamos de nuevo todos los datos, independientemente de si se modifican o no.
+  const sendData = () => {
+    if (profileChange()) {
+      console.log(profile);
+      const userId = profile.id;
+
+      updateUser(rdxToken.credentials.token, userId, profile)
+        .then(() => {
+          console.log(`Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`);
+        })
+        .catch((error) => {
+          console.log("Aquí quiero recuperar el error de la base de datos.", error);
+        });
+      setTimeout(() => {
+        setIsEnabled(true);
+      }, 1000);
+    }else {
+        console.log(`${profile.name}, no se han actualizado los campos porque no se ha modificado ningún campo.`);
+        profileChange(false);
+      }
       setIsEnabled(true);
-    }, 1000);
+  };
+
+  const profileChange = () => {
+    return (
+      profile.name !== originalProfile.name ||
+      profile.surname !== originalProfile.surname ||
+      profile.phone !== originalProfile.phone ||
+      profile.email !== originalProfile.email
+    );
   };
 
   return (
     <div className="profileDesign">
-    Datos de contacto:
+      Datos de contacto:
       <div>Nombre</div>
       <CustomInput
         disabled={isEnabled}
@@ -91,7 +111,6 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.nameError}</div>
-
       <div>Apellidos</div>
       <CustomInput
         disabled={isEnabled}
@@ -104,7 +123,6 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.surnameError}</div>
-
       <div>Teléfono</div>
       <CustomInput
         disabled={isEnabled}
@@ -119,7 +137,6 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.phoneError}</div>
-
       <div>Dirección de e-mail</div>
       <CustomInput
         disabled={isEnabled}
@@ -141,7 +158,6 @@ export const Profile = () => {
           Enviar cambios
         </div>
       )}
-
     </div>
   );
 };
