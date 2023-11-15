@@ -12,7 +12,7 @@ export const Profile = () => {
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
-  const [setProfile] = useState({
+  const [profile, setProfile] = useState({
     name: "",
     surname: "",
     phone: 0,
@@ -47,7 +47,7 @@ export const Profile = () => {
       // Realizamos la solicitud a la API con el token almacenado en Redux
       profileUser(rdxToken.credentials.token)
         .then((results) => {
-          console.log("Datos del perfil:", results.data.data);
+          setProfile(results.data.data);
         })
         .catch((error) => {
           console.error(error);
@@ -64,7 +64,7 @@ export const Profile = () => {
         type={"text"}
         name={"name"}
         placeholder={""}
-        // value={}
+        value={profile.name}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -76,7 +76,7 @@ export const Profile = () => {
         type={"text"}
         name={"surname"}
         placeholder={""}
-        // value={}
+        value={profile.surname}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -90,7 +90,7 @@ export const Profile = () => {
         placeholder={""}
         min={600000000}
         max={900000000}
-        // value={}
+        value={profile.phone}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -102,7 +102,7 @@ export const Profile = () => {
         type={"email"}
         name={"email"}
         placeholder={""}
-        // value={}
+        value={profile.email}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />

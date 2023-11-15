@@ -107,7 +107,7 @@ export const Register = () => {
         type={"text"}
         name={"name"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -119,7 +119,7 @@ export const Register = () => {
         type={"text"}
         name={"surname"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -133,7 +133,7 @@ export const Register = () => {
         placeholder={""}
         min={600000000}
         max={900000000}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -145,7 +145,7 @@ export const Register = () => {
         type={"email"}
         name={"email"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -157,7 +157,7 @@ export const Register = () => {
         type={"password"}
         name={"password"}
         placeholder={""}
-        // value={}
+        value={""}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />

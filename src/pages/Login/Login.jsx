@@ -125,7 +125,7 @@ export const Login = () => {
           type={"email"}
           name={"email"}
           placeholder={""}
-          // value={}
+          value={""}
           functionProp={functionHandler}
           functionBlur={errorCheck}
         />
@@ -139,7 +139,7 @@ export const Login = () => {
           type={"password"}
           name={"password"}
           placeholder={""}
-          // value={}
+          value={""}
           functionProp={functionHandler}
           autocomplete="on"
           functionBlur={errorCheck}
