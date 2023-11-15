@@ -104,7 +104,7 @@ export const Register = () => {
     <div>Nombre</div>
       <CustomInput
         design={"inputDesign"}
-        type={"name"}
+        type={"text"}
         name={"name"}
         placeholder={""}
         // value={}
@@ -116,7 +116,7 @@ export const Register = () => {
       <div>Apellidos</div>
       <CustomInput
         design={"inputDesign"}
-        type={"surname"}
+        type={"text"}
         name={"surname"}
         placeholder={""}
         // value={}

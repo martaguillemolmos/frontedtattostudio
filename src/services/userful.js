@@ -45,5 +45,14 @@ export const validator = (type, value) => {
                 return "";
 
             }
+        
+        // Validación de un boolean
+        case 'is_active':
+
+            if (value !== true && value !== false) {
+                return "El valor debe ser true o false.";
+            } else {
+                return "";
+            }
         }
     }
