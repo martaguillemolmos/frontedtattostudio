@@ -8,7 +8,7 @@ export const CustomInput = ({disabled, design, type, name, placeholder, value, f
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value || undefined ? value : ""}
+        value={value || ""}
         onChange={(e) => functionProp(e)}
         onBlur={(e)=>functionBlur(e)}
         min={min}

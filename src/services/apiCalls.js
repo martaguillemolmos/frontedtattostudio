@@ -22,7 +22,7 @@ export const profileUser = (token) => {
     })
 }
 // Actualizamos los datos del usuario
-export const updateUser = (token,id, body) => {
+export const updateUser = (token, id, body) => {
     return axios.put (`http://localhost:4000/user/${id}`, body, {
         headers: {
             'Authorization': `Bearer ${token}`

@@ -20,7 +20,6 @@ export const Profile = () => {
     surname: "",
     phone: 0,
     email: "",
-    is_active: true,
   });
 
   const [profileError, setProfileError] = useState({
@@ -28,7 +27,6 @@ export const Profile = () => {
     surnameError: "",
     phoneError: "",
     emailError: "",
-    is_active: "",
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
