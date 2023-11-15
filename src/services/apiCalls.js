@@ -12,3 +12,8 @@ export const logUser = async (body) => {
     return await axios.post (`http://localhost:4000/user/login`, body) 
 }
 
+// Productos
+export const getAllproducts = async () => {
+    // Conectamos la API a la base de datos
+    return await axios.get (`http://localhost:4000/product`);
+}
