@@ -23,6 +23,8 @@ export const Header = () => {
       <div className="headerText">
         {/* Estas son las vistas públicas que siempre visualizaremos */}
         <LinkButton path={"/"} title={"Inicio"} />
+        <LinkButton path={"/product"} title={"Productos"} />
+
         {/* Estas vistas son las que podremos visualizar, dependiendo de si contamos con token. */}
         
         {!rdxCredentials?.credentials.token ? (
