@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 // //Importamos Redux
 import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
+
+//Importamos las rutas
 import { profileUser } from "../../services/apiCalls";
+
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 
@@ -17,6 +20,7 @@ export const Profile = () => {
     surname: "",
     phone: 0,
     email: "",
+    is_active: true,
   });
 
   const [profileError, setProfileError] = useState({
@@ -24,7 +28,10 @@ export const Profile = () => {
     surnameError: "",
     phoneError: "",
     emailError: "",
+    is_active: "",
   });
+
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const functionHandler = (e) => {
     setProfile((prevState) => ({
@@ -54,12 +61,22 @@ export const Profile = () => {
         });
     }
   }, [rdxToken]);
+ 
+  const sendData = () => {
+    console.log("aqui entra, que es el SendData")
+    console.log("encontramos el token",rdxToken.credentials.token)
+    console.log("este es el profile",profile)
+    setTimeout(() => {
+      setIsEnabled(true);
+    }, 1000);
+  };
 
   return (
     <div className="profileDesign">
-
+    Datos de contacto:
       <div>Nombre</div>
       <CustomInput
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"name"}
@@ -68,10 +85,11 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
-    <div>{profileError.nameError}</div>
+      <div>{profileError.nameError}</div>
 
-    <div>Apellidos</div>
+      <div>Apellidos</div>
       <CustomInput
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"surname"}
@@ -80,10 +98,11 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
-    <div>{profileError.surnameError}</div>
+      <div>{profileError.surnameError}</div>
 
-    <div>Teléfono</div>
+      <div>Teléfono</div>
       <CustomInput
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"number"}
         name={"phone"}
@@ -94,10 +113,11 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
-    <div>{profileError.phoneError}</div>
+      <div>{profileError.phoneError}</div>
 
-    <div>Dirección de e-mail</div>
+      <div>Dirección de e-mail</div>
       <CustomInput
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"email"}
         name={"email"}
@@ -106,9 +126,17 @@ export const Profile = () => {
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
-    <div>{profileError.emailError}</div>
+      <div>{profileError.emailError}</div>
+      {isEnabled ? (
+        <div className="editDesign" onClick={() => setIsEnabled(!isEnabled)}>
+          Edita tus datos
+        </div>
+      ) : (
+        <div className="sendDesign" onClick={() => sendData()}>
+          Enviar cambios
+        </div>
+      )}
 
     </div>
-
   );
 };

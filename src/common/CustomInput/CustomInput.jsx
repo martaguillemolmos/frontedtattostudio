@@ -1,13 +1,14 @@
 import "./CustomInput.css"
 
-export const CustomInput = ({design, type, name, placeholder, value, functionProp, functionBlur, min, max}) => {
+export const CustomInput = ({disabled, design, type, name, placeholder, value, functionProp, functionBlur, min, max}) => {
     return (
         <input 
+        disabled={disabled}
         className={design}
         type={type}
         name={name}
         placeholder={placeholder}
-        value={value || undefined}
+        value={value || undefined ? value : ""}
         onChange={(e) => functionProp(e)}
         onBlur={(e)=>functionBlur(e)}
         min={min}

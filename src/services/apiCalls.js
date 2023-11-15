@@ -13,6 +13,7 @@ export const logUser = async (body) => {
 }
 
 //Profile
+// Mostramos los datos del usuario.
 export const profileUser = (token) => {
     return axios.get (`http://localhost:4000/user/profile`, {
         headers: {
