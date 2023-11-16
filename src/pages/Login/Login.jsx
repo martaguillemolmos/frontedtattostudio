@@ -5,7 +5,6 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { validator } from "../../services/userful";
-
 import CustomAlert  from "../../common/Alert/CustomAlert";
 
 //Importo Redux
@@ -22,6 +21,7 @@ export const Login = () => {
 
   const rdxCredentials = useSelector(userData);
 
+  
   // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
     email: "",

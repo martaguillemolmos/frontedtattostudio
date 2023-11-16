@@ -71,9 +71,11 @@ export const Profile = () => {
         .catch((error) => {
           console.error(error);
         });
-    } 
-      //Si ya contamos no contamos con un token, redirigimos al usuario a inicio.
-       navigate("/");
+    } else {
+     //Si no contamos con un token, redirigimos al usuario a inicio.
+     navigate("/");
+    }
+ 
     
   }, [rdxToken, navigate]);
 

@@ -29,9 +29,20 @@ export const updateUser = (token, id, body) => {
         }
     })
 }
+
 // Productos
 export const getAllproducts = async () => {
     // Conectamos la API a la base de datos
     return await axios.get (`http://localhost:4000/product`);
+}
+
+// Appointments
+export const getAppointmentsByUserId = async (token) => {
+    // Conectamos la API a la base de datos
+    return await axios.get (`http://localhost:4000/appointment/user`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 }
 
