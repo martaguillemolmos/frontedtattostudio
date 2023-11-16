@@ -1,47 +1,45 @@
-import "./Header.css";
-import { LinkButton } from "../LinkButton/LinkButton";
 
-//Importamos Redux
-import { useSelector, useDispatch } from "react-redux";
-import { logout, userData } from "../../pages/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Group, Code, ScrollArea } from '@mantine/core';
+import {
+  IconNotes,
+  IconCalendarStats,
+  IconGauge,
+  IconPresentationAnalytics,
+  IconFileAnalytics,
+  IconAdjustments,
+  IconLock,
+} from '@tabler/icons-react';
+import { LinksGroup } from './NavbarLinksGroup/NavbarLinksGroup';
+import './NavbarNested.module.css';
 
+const mockdata = [
+  { label: 'Dashboard', icon: IconGauge },
+  {
+    label: 'Market news',
+    icon: IconNotes,
+    initiallyOpened: true,
+  },
+  {
+    label: 'Releases',
+    icon: IconCalendarStats,
+  },
+];
 
 export const Header = () => {
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-  const rdxCredentials = useSelector(userData);
-
-  const logOutMe = () => {
-    dispatch(logout( {credentials :""}))
-    navigate("/")
-  }
+  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
-    <div className="headerDesign">
-      <div className="headerText">
-        {/* Estas son las vistas públicas que siempre visualizaremos */}
-        <LinkButton path={"/"} title={"Inicio"} />
-        <LinkButton path={"/product"} title={"Productos"} />
-
-        {/* Estas vistas son las que podremos visualizar, dependiendo de si contamos con token. */}
-        
-        {!rdxCredentials?.credentials.token ? (
-        <> 
-        <LinkButton path={"/register"} title={"Registrarte"} />
-        <LinkButton path={"/login"} title={"Iniciar sesión"} />
-
-        </>
-         ) : (
-        <>
-        <LinkButton path={"/profile"} title={rdxCredentials.credentials.name} />
-        <div onClick={logOutMe}>
-            <LinkButton path={"/"} title={"Cerrar sesión"} />  
-          </div>
-        </>
-        )}
+    <nav className='navbar'>
+      <div className='header'>
+        <Group justify="space-between">
+          <Code fw={700}>v3.1.2</Code>
+        </Group>
       </div>
-    </div>
+
+      <ScrollArea className='links'>
+        <div className='linksInner'>{links}</div>
+      </ScrollArea>
+
+    </nav>
   );
-};
+}
