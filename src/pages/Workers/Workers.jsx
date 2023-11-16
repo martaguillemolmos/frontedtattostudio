@@ -8,7 +8,6 @@ import { jwtDecode } from "jwt-decode";
 
 export const Workers = () => {
   const navigate = useNavigate();
-
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
   //Aquí recuperamos solo el token
