@@ -18,7 +18,7 @@ export const Appointments = () => {
         if(!rdxToken?.credentials.token){
           console.log(rdxToken)
           //Si ya contamos con un token, redirigimos al usuario a inicio.
-          navigate("/");
+          navigate("/login");
         } 
       },[rdxToken, navigate]);
 
