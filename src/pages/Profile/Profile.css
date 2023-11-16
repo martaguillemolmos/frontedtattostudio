@@ -10,3 +10,13 @@
 
     background-color: rgb(27, 245, 172);
 }
+
+.deleteAccount{
+    height: 2em;
+
+   cursor: pointer;
+}
+
+.deleteAccount:hover{
+    background-color: red;
+}

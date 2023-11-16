@@ -6,10 +6,18 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 import { registerUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
+//Importo Redux
+import { useDispatch } from "react-redux";
+import { login} from "../userSlice";
 
 export const Register = () => {
  //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
  const navigate = useNavigate();
+
+ //Declaramos esta constante, que nos permitirá leer el contenido.
+ const dispatch = useDispatch();
+
+
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el register.
   const [registerData, setRegisterData] = useState({
@@ -66,10 +74,13 @@ export const Register = () => {
             phone: parseInt(registerData.phone)
         }
         
-        registerUser(data).then((resultado => {
+        registerUser(data)
+        .then((resultado => {
             console.log(resultado)
+             //Guardanos el token
+        dispatch(login({ credentials: resultado.data}))
             setTimeout(() => {
-              navigate("/login");
+              navigate("/profile");
             }, 500);
 
         }))

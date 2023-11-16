@@ -15,12 +15,15 @@ export const Profile = () => {
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
 
+  //Instanciar Redux en escritura
+  
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
     name: "",
     surname: "",
     phone: 0,
     email: "",
+    is_active: true,
   });
 
   const [profileError, setProfileError] = useState({
@@ -28,6 +31,7 @@ export const Profile = () => {
     surnameError: "",
     phoneError: "",
     emailError: "",
+    is_active: "",
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
@@ -96,9 +100,16 @@ export const Profile = () => {
     );
   };
 
+  const desactiveAccount = () => {
+    return(
+      profile.is_active = false
+    )
+  }
+  
+
   return (
     <div className="profileDesign">
-      Datos de contacto:
+      Información básica
       <div>Nombre</div>
       <CustomInput
         disabled={isEnabled}
@@ -123,6 +134,7 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.surnameError}</div>
+      Información de contacto
       <div>Teléfono</div>
       <CustomInput
         disabled={isEnabled}
@@ -158,6 +170,18 @@ export const Profile = () => {
           Enviar cambios
         </div>
       )}
+      <div> 
+
+        Contraseña
+        <div>Si eligues una contraseña segura, ayudas a proteger tu cuenta.
+          <div>Cambiar contraseña</div>
+        </div>
+
+        Otras opciones
+        <div>Desactiva tu cuenta 
+          <div className="deleteAccount" onClick={() => desactiveAccount}>Desactivar</div></div>
+        
+      </div>
     </div>
   );
 };

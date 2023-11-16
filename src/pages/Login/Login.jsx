@@ -82,7 +82,6 @@ export const Login = () => {
         console.log(resultado);
         //Guardanos el token
         dispatch(login({ credentials: resultado.data}))
-        //En este caso, utilizamos un resultado.data porque lo que estamos esperando que nos devuelva es un objeto. ¿? Está en userSlice.
 
         //Una vez guardado el token,nos dirigimos a profile.
         setTimeout(() => {
