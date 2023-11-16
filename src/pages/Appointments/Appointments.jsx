@@ -36,6 +36,8 @@ export const Appointments = () => {
         }
       },[appointments]);
 
+    
+
     return (
         <div className="appointmentDesign">
         Appointment   

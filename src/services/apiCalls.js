@@ -48,7 +48,11 @@ export const getAppointmentsByUserId = async (token) => {
 
 //Workers
 //Recuperar la información de todos los trabajadores
-export const getAllWorkers = async () => {
+export const getAllWorkers = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/worker`);
+    return await axios.get (`http://localhost:4000/worker`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
 }
