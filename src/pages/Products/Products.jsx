@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
 import "./Products.css"
+import { useEffect, useState } from "react"
 import { getAllproducts } from "../../services/apiCalls"
 
 
