@@ -67,6 +67,7 @@ export const Login = () => {
   useEffect(()=>{
     //Comprobamos si ya hay un token almacenado en Redux
         if(rdxCredentials?.credentials.token){
+          console.log(rdxCredentials)
           //Si ya contamos con un token, redirigimos al usuario a inicio.
           navigate("/");
         } 

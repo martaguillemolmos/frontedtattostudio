@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Register.css";
 
 import CustomAlert from "../../common/Alert/CustomAlert";
@@ -7,8 +7,8 @@ import { validator } from "../../services/userful";
 import { registerUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 //Importo Redux
-import { useDispatch } from "react-redux";
-import { login} from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login, userData} from "../userSlice";
 
 export const Register = () => {
  //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
@@ -17,6 +17,7 @@ export const Register = () => {
  //Declaramos esta constante, que nos permitirá leer el contenido.
  const dispatch = useDispatch();
 
+ const rdxCredentials = useSelector(userData);
 
 
   // Declaramos las credenciales que vamos a solicitar para poder realizar el register.
@@ -64,6 +65,13 @@ export const Register = () => {
     }));
   };
 
+  useEffect(()=>{
+    //Comprobamos si ya hay un token almacenado en Redux
+        if(rdxCredentials?.credentials.token){
+          //Si ya contamos con un token, redirigimos al usuario a inicio.
+          navigate("/");
+        } 
+      },[rdxCredentials, navigate]);
 
   //Registrar nuevos usuarios.
   const createUser = () => {

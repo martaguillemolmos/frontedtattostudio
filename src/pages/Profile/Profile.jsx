@@ -11,12 +11,16 @@ import { profileUser, updateUser } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 
+import { useNavigate } from "react-router-dom";
+
+
 export const Profile = () => {
+   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
+ const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
 
   //Instanciar Redux en escritura
-  
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
     name: "",
@@ -55,6 +59,8 @@ export const Profile = () => {
   };
 
   useEffect(() => {
+
+
     if (rdxToken) {
       // Realizamos la solicitud a la API con el token almacenado en Redux
       profileUser(rdxToken.credentials.token)
@@ -65,8 +71,11 @@ export const Profile = () => {
         .catch((error) => {
           console.error(error);
         });
-    }
-  }, [rdxToken]);
+    } 
+      //Si ya contamos no contamos con un token, redirigimos al usuario a inicio.
+       navigate("/");
+    
+  }, [rdxToken, navigate]);
 
   //Guardamos de nuevo todos los datos, independientemente de si se modifican o no.
   const sendData = () => {
