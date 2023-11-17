@@ -33,7 +33,7 @@ export const updateUser = (token, id, body) => {
 // Productos
 export const getAllproducts = async () => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/product`);
+    return await axios.get (`http://localhost:4000/portfolio`);
 }
 
 // Appointments

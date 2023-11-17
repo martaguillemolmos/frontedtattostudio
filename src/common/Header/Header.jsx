@@ -11,14 +11,20 @@ import { jwtDecode } from "jwt-decode";
 export const Header = () => {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const rdxCredentials = useSelector(userData);
+  const rdxToken = useSelector(userData);
 
-  const token = rdxCredentials.credentials.token;
+  console.log("que soy?", rdxToken)
+
+  const token = rdxToken?.credentials?.token;
+  console.log("soy el token?", token)
   //Ahora debemos de decodificar el token para acceder a la información de superAdmin.
-  const decodificado = jwtDecode(token);
+  const decodificado = token ? jwtDecode(token) : 'user';
   //Ahpra lo que hacemos es recuperar el token para poder validar el acceso a las rutas.
   const roleToken = decodificado.role
+  console.log("soy el rol del token?", roleToken)
+
+  const dispatch = useDispatch();
+  
   
   const logOutMe = () => {
     dispatch(logout( {credentials :""}))
@@ -33,21 +39,23 @@ export const Header = () => {
         <LinkButton path={"/product"} title={"Productos"} />
   
         {/* Estas vistas son las que podremos visualizar, dependiendo de si contamos con token. */}
-        {!rdxCredentials?.credentials.token ? (
+        {!rdxToken?.credentials.token ? (
           <>
             <LinkButton path={"/register"} title={"Registrarte"} />
             <LinkButton path={"/login"} title={"Iniciar sesión"} />
           </>
         ) : (
           <>
-            {!roleToken == "super_admin" ? (
+            { roleToken !== "super_admin" ? (
               <>
-                <LinkButton path={"/profile"} title={rdxCredentials.credentials.name} />
-                <LinkButton path={"/appointment/user"} title={"Citas usuario"} />
+                <LinkButton path={"/profile"} title={rdxToken.credentials.name} />
+                <LinkButton path={"/appointments"} title={"Citas usuario"} />
               </>
             ) : (
               <>
                 <LinkButton path={"/appointment"} title={"Citas"} />
+                <LinkButton path={"/worker"} title={"Trabajadores"} />
+
               </>
             )}
           </>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Appointments.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { useEffect, useState } from "react";
 import {
@@ -10,13 +10,14 @@ import {
 import CardAppointments from "../../common/CardAppointments/CardAppointments";
 import { validator } from "../../services/userful";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
-import { setAppointment } from "../appointmentSlice";
+// import { setAppointment } from "../appointmentSlice";
 
 export const Appointments = () => {
+  console.log("entra aquí")
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
   const navigate = useNavigate();
   //Declaramos esta constante, que nos permitirá leer el contenido.
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
   //Aquí recuperamos solo el token
@@ -52,6 +53,7 @@ export const Appointments = () => {
   };
   //Utilizamos este useEffect para que, en el caso que alguien ya se haya logeado, no pueda acceder a esta vista.
   useEffect(() => {
+    console.log("entra aquí")
     // Comprobamos si ya hay un token almacenado en Redux
     if (token) {
       // Comprobamos que el array de appointments sea menor a 0.
@@ -61,7 +63,7 @@ export const Appointments = () => {
           .then((results) => {
             setAppointments(results.data);
             //Guardamos la información a través del Slice.
-            dispatch(setAppointment(results.data));
+            // dispatch(setAppointment(results.data));
           })
           .catch((error) => {
             if (error.response && error.response.data) {
@@ -91,7 +93,7 @@ export const Appointments = () => {
         .then((resultado) => {
           console.log("entramos aquí",resultado);
           //Guardaríamos la información
-          dispatch(setAppointment,{ resultado });
+          // dispatch(setAppointment,{ resultado });
         })
         .catch((error) => {
           console.log(error);
