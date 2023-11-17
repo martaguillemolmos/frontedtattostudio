@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { WorkerCard } from "../../common/WorkerCard/WorkerCard";
 
 export const Workers = () => {
   const navigate = useNavigate();
@@ -31,7 +32,29 @@ export const Workers = () => {
       //Si no contamos con el rol de superAdmin
       navigate("/");
     }
-  }, [workers.length]);
+  }, [workers]);
 
-  return <div className="workerDesign">Soy Worker</div>;
+  return( 
+    <div className="workersDesign">
+    {workers.length > 0 ? (
+      <div className="workerRoster">
+        {workers.map((workers) => {
+          return (
+            <WorkerCard
+            key ={workers.id}
+            name ={workers.users.name}
+            surname={workers.users.surname}
+            experience={workers.experience}
+            formation={workers.formation}
+            contracted_at={workers.contracted_at}
+             />
+            );
+        })}
+      </div>
+    ) : (
+      <div>Esperando las películas por defecto</div>
+    )}
+  </div>
+);
 };
+

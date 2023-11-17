@@ -1,0 +1,51 @@
+.card {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card.pendingColor {
+    background-color: #ffc107; /* amarillo */
+  }
+  
+  .card.approvedColor {
+    background-color: #28a745; /* verde */
+  }
+  
+  .card.cancelledColor {
+    background-color: #dc3545; /* rojo */
+  }
+  
+  .card.completedColor {
+    background-color: #007bff; /* azul */
+  }
+  
+  .card.defaultColor {
+    background-color: #f8f8f8;
+  }
+  
+  .cardHeader {
+    text-align: right;
+  }
+  
+  .cardId {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .cardInfo {
+    margin-bottom: 8px;
+  }
+  
+  .infoLabel {
+    font-weight: bold;
+    margin-right: 8px;
+    color: #333;
+  }
+  
+  .infoValue {
+    color: #555;
+  }

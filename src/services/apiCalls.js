@@ -46,6 +46,16 @@ export const getAppointmentsByUserId = async (token) => {
     });
 }
 
+//Crear appointment
+export const createAppointment = async (token) => {
+    // Conectamos la API a la base de datos
+    return await axios.post (`http://localhost:4000/appointment`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
 //Workers
 //Recuperar la información de todos los trabajadores
 export const getAllWorkers = async (token) => {

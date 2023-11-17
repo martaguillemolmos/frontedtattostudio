@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 export const validator = (type, value) => {
     
     // eslint-disable-next-line no-useless-escape
@@ -46,6 +48,29 @@ export const validator = (type, value) => {
 
             }
         
+        //Validación de id
+        case 'profile_id':
+
+        if (value !== undefined) {
+            return "Introduce un id válido";
+        } else {
+            return "";
+        }
+
+        // Validación de fecha
+        case 'date': {
+            const dateBody = dayjs(value, "'{AAAA} MM-DDTHH:mm:ss SSS [Z] A'");
+            const dateNow = dayjs();
+
+            if (!dateBody.isValid() || dateBody < dateNow) {
+                return "El formato de la fecha no es válido o es anterior a la creación de la cita. Es {AAAA} MM-DDTHH:mm:ss SSS [Z] A'";
+            }
+
+            if (!dateBody) {
+                return "La fecha y hora no puede ser nula.";
+            }
+            break;
+        }
         // Validación de un boolean
         case 'is_active':
 
@@ -55,4 +80,6 @@ export const validator = (type, value) => {
                 return "";
             }
         }
+
+    
     }
