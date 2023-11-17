@@ -11,6 +11,10 @@ export const Products = () => {
       getAllproducts()
         .then((results) => {
           setProducts(results.data);
+          const searchProfile = results.data
+          console.log("soy search",searchProfile)
+          const arrayVacio = []
+          
           console.log(results.data);
         })
         .catch((error) => console.og(error));
