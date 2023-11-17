@@ -47,12 +47,12 @@ export const getAppointmentsByUserId = async (token) => {
 }
 
 //Crear appointment
-export const createAppointment = async (token) => {
+export const createAppointment = async (token, body) => {
     // Conectamos la API a la base de datos
     return await axios.post (`http://localhost:4000/appointment`, {
         headers: {
             'Authorization': `Bearer ${token}`
-        }
+        }, body
     });
 }
 
