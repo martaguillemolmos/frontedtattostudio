@@ -14,10 +14,9 @@ import { validator } from "../../services/userful";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
-
 export const Profile = () => {
-   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
- const navigate = useNavigate();
+  //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
+  const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
 
@@ -60,31 +59,30 @@ export const Profile = () => {
   };
 
   useEffect(() => {
-
     if (rdxToken !== "") {
       const token = rdxToken.credentials.token;
-      const decoredToken = jwtDecode(token)
-      console.log(decoredToken)
+      const decoredToken = jwtDecode(token);
+      console.log(decoredToken);
       if (decoredToken)
-      // Realizamos la solicitud a la API con el token almacenado en Redux
-      profileUser(token)
-        .then((results) => {
-          setProfile(results.data.data);
-          setOriginalProfile(results.data.data);
-          if (decoredToken.role === "admin") {
-console.log("Usuario es un trabajador. Realizar acciones adicionales.");
-          }
-        })
+        // Realizamos la solicitud a la API con el token almacenado en Redux
+        profileUser(token)
+          .then((results) => {
+            setProfile(results.data.data);
+            setOriginalProfile(results.data.data);
+            if (decoredToken.role === "admin") {
+              console.log(
+                "Usuario es un trabajador."
+              );
+            }
+          })
 
-        .catch((error) => {
-          console.error(error);
-        });
+          .catch((error) => {
+            console.error(error);
+          });
     } else {
-     //Si no contamos con un token, redirigimos al usuario a inicio.
-     navigate("/");
+      //Si no contamos con un token, redirigimos al usuario a inicio.
+      navigate("/");
     }
- 
-    
   }, [rdxToken, navigate]);
 
   //Guardamos de nuevo todos los datos, independientemente de si se modifican o no.
@@ -95,19 +93,26 @@ console.log("Usuario es un trabajador. Realizar acciones adicionales.");
 
       updateUser(rdxToken.credentials.token, userId, profile)
         .then(() => {
-          console.log(`Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`);
+          console.log(
+            `Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`
+          );
         })
         .catch((error) => {
-          console.log("Aquí quiero recuperar el error de la base de datos.", error);
+          console.log(
+            "Aquí quiero recuperar el error de la base de datos.",
+            error
+          );
         });
       setTimeout(() => {
         setIsEnabled(true);
       }, 1000);
-    }else {
-        console.log(`${profile.name}, no se han actualizado los campos porque no se ha modificado ningún campo.`);
-        profileChange(false);
-      }
-      setIsEnabled(true);
+    } else {
+      console.log(
+        `${profile.name}, no se han actualizado los campos porque no se ha modificado ningún campo.`
+      );
+      profileChange(false);
+    }
+    setIsEnabled(true);
   };
 
   const profileChange = () => {
@@ -120,11 +125,8 @@ console.log("Usuario es un trabajador. Realizar acciones adicionales.");
   };
 
   const desactiveAccount = () => {
-    return(
-      profile.is_active = false
-    )
-  }
-  
+    return (profile.is_active = false);
+  };
 
   return (
     <div className="profileDesign">
@@ -189,17 +191,19 @@ console.log("Usuario es un trabajador. Realizar acciones adicionales.");
           Enviar cambios
         </div>
       )}
-      <div> 
-
+      <div>
         Contraseña
-        <div>Si eligues una contraseña segura, ayudas a proteger tu cuenta.
+        <div>
+          Si eligues una contraseña segura, ayudas a proteger tu cuenta.
           <div>Cambiar contraseña</div>
         </div>
-
         Otras opciones
-        <div>Desactiva tu cuenta 
-          <div className="deleteAccount" onClick={() => desactiveAccount}>Desactivar</div></div>
-        
+        <div>
+          Desactiva tu cuenta
+          <div className="deleteAccount" onClick={() => desactiveAccount}>
+            Desactivar
+          </div>
+        </div>
       </div>
     </div>
   );

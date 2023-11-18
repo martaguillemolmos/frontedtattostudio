@@ -84,3 +84,13 @@ export const getAllWorkers = async (token) => {
         }
     });
 }
+
+//Que el usuario pueda recuperar su información
+export const profileWorker = async (token) => {
+    // Conectamos la API a la base de datos
+    return await axios.get (`http://localhost:4000/worker/profile`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
