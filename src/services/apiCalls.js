@@ -46,6 +46,16 @@ export const getAppointmentsByUserId = async (token) => {
     });
 }
 
+// Super_Admin: Appointments
+export const getAllAppointments = async (token) => {
+    // Conectamos la API a la base de datos
+    return await axios.get (`http://localhost:4000/appointment`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
 //Crear appointment
 export const createAppointment = async (token, body) => {
     // Conectamos la API a la base de datos
