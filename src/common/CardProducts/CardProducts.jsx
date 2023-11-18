@@ -2,9 +2,14 @@ import { Card, Image, Text, Group, Badge, Center} from '@mantine/core';
 import { IconFileDescription, IconClockHour2 } from '@tabler/icons-react';
 import classes from './CardProducts.css';
 import { ExampleModal } from '../Modal/Modal';
+import { useSelector } from 'react-redux';
+import { userData } from '../../pages/userSlice';
+import { useEffect, useState } from 'react';
 
 export const FeaturesCard = ({  product, type, description,duration, image, price }) => {
-    const mockdata = [
+  const rdxToken = useSelector(userData);
+  const [modalShow, setModalShow] = useState (false);
+  const mockdata = [
         { label: description, icon: IconFileDescription },
         { label: duration, icon: IconClockHour2 },    
       ];
@@ -15,6 +20,16 @@ export const FeaturesCard = ({  product, type, description,duration, image, pric
     </Center>
   ));
 
+  useEffect (() => {
+    if(!rdxToken.credentials == ""){
+      setModalShow(true)
+    }else {
+      setModalShow(false)
+    }
+  }, [rdxToken])
+
+  console.log("soy el token",rdxToken)
+  console.log("soy el modal",setModalShow)
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
@@ -48,7 +63,7 @@ export const FeaturesCard = ({  product, type, description,duration, image, pric
           </div>
 
           <div>
-            <ExampleModal />
+           {rdxToken && modalShow && <ExampleModal />} 
           </div>
 
 

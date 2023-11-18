@@ -4,6 +4,7 @@ import { getAllproducts } from "../../services/apiCalls";
 import { FeaturesCard } from "../../common/CardProducts/CardProducts";
 
 export const Products = () => {
+
   const [profile, setProfile] = useState([]);
   const [productId, setProductId] = useState(new Set());
 
@@ -30,6 +31,7 @@ export const Products = () => {
         })
         .catch((error) => console.og(error));
     }
+  
   }, [profile, productId]);
 
   return (
@@ -48,7 +50,7 @@ export const Products = () => {
                 duration={`${results.portfolioWorker.duration} hora`}
                 price={results.portfolioWorker.price}
               />
-              
+
             );
           })}
         </div>
