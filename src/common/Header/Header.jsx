@@ -28,7 +28,7 @@ export const Header = () => {
       } catch (error) {
         console.log("Ay ay ay");
       }
-    } 
+    }
   }, [rdxToken]);
 
   const logOutMe = () => {
@@ -39,35 +39,33 @@ export const Header = () => {
   return (
     <div className="headerDesign">
       <div className="headerText">
-        {/* Estas son las vistas públicas que siempre visualizaremos */}
+        {/* Vistas públicas */}
         <LinkButton path={"/"} title={"Inicio"} />
         <LinkButton path={"/product"} title={"Productos"} />
-
-        {/* Estas vistas son las que podremos visualizar, dependiendo de si contamos con token. */}
-        {!rdxToken ? (
+        {/* Vistas si estás registrado o no*/}
+        {/* No estás registrado */}
+        {rdxToken.credentials == "" ? (
           <>
             <LinkButton path={"/register"} title={"Registrarte"} />
             <LinkButton path={"/login"} title={"Iniciar sesión"} />
           </>
         ) : (
           <>
-            <div onClick={logOutMe}>
-              <LinkButton path={"/"} title={"Cerrar sesión"} />
-            </div>
+            <LinkButton path={"/profile"} title={rdxToken.credentials.name} />
+            {/* Si estás registrado pero no eres super_admin */}
             {decodificadoToken !== "super_admin" ? (
               <>
-                <LinkButton
-                  path={"/profile"}
-                  title={rdxToken.credentials.name}
-                />
-                <LinkButton path={"/appointments"} title={"Citas usuario"} />
+                <LinkButton path={"appointment/user"} title={"Citas usuario"} />
               </>
             ) : (
               <>
-                <LinkButton path={"/appointment"} title={"Citas"} />
+                {/* <LinkButton path={"/appointment/user"} title={"Citas"} /> */}
                 <LinkButton path={"/worker"} title={"Trabajadores"} />
               </>
             )}
+            <div onClick={logOutMe}>
+              <LinkButton path={"/"} title={"Cerrar sesión"} />
+            </div>
           </>
         )}
       </div>
