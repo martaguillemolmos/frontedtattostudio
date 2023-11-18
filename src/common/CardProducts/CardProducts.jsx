@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { userData } from '../../pages/userSlice';
 import { useEffect, useState } from 'react';
 
-export const FeaturesCard = ({  product, type, description,duration, image, price }) => {
+export const FeaturesCard = ({ productId, product, type, description,duration, image, price, allProducts }) => {
   const rdxToken = useSelector(userData);
   const [modalShow, setModalShow] = useState (false);
   const mockdata = [
@@ -28,8 +28,8 @@ export const FeaturesCard = ({  product, type, description,duration, image, pric
     }
   }, [rdxToken])
 
-  console.log("soy el token",rdxToken)
-  console.log("soy el modal",setModalShow)
+  // console.log("soy el token",rdxToken)
+  // console.log("soy el modal",setModalShow)
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
@@ -63,7 +63,7 @@ export const FeaturesCard = ({  product, type, description,duration, image, pric
           </div>
 
           <div>
-           {rdxToken && modalShow && <ExampleModal />} 
+           {rdxToken && modalShow && <ExampleModal allProducts={allProducts} productId={productId} />} 
           </div>
 
 

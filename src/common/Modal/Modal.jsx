@@ -1,9 +1,10 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import "./Modal.css"
-export const ExampleModal = () => {
+export const ExampleModal = ({allProducts, productId}) => {
   const [opened, { open, close }] = useDisclosure(false);
-
+  console.log("alProducts", allProducts);
+  console.log("prodcutId", productId)
   return (
     <>
       <Modal.Root opened={opened} onClose={close} title="Solicitar cita">

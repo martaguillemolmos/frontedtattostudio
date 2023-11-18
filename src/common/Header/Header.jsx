@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 export const Header = () => {
   const navigate = useNavigate();
   const rdxToken = useSelector(userData);
-  console.log("este token es lo mejor", rdxToken);
+  // console.log("este token es lo mejor", rdxToken);
   const [decodificadoToken, setDecodificadoToken] = useState(null);
 
   const dispatch = useDispatch();
@@ -20,11 +20,11 @@ export const Header = () => {
     if (rdxToken.credentials !== "") {
       try {
         const token = rdxToken?.credentials?.token;
-        console.log("soy el token", token);
+        // console.log("soy el token", token);
         const decodificado = token ? jwtDecode(token) : "user";
         const roleToken = decodificado.role;
         setDecodificadoToken(roleToken);
-        console.log("soy el rol del token?", roleToken);
+        // console.log("soy el rol del token?", roleToken);
       } catch (error) {
         console.log("Ay ay ay");
       }
