@@ -4,35 +4,35 @@ import { getAllproducts } from "../../services/apiCalls";
 import { CardProduct } from "../../common/CardProduct/CardProduct";
 
 export const Products = () => {
-  const [products, setProducts] = useState([]);
+  const [profile, setProfile] = useState([]);
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (profile.length === 0) {
       getAllproducts()
         .then((results) => {
-          setProducts(results.data);
-          const searchProfile = results.data
-          console.log("soy search",searchProfile)
-          const arrayVacio = []
-          
-          console.log(results.data);
-        })
+          setProfile(results.data);
+          const searchData = results.data
+          console.log("soy search",searchData)
+          })
+        
         .catch((error) => console.og(error));
-    }
-  }, [products]);
+}
+  }, [profile]);
 
   return (
     <div className="productsDesign">
-      {products.length > 0 ? (
+      {profile.length > 0 ? (
         <div className="productsRoster">
-          {products.map((products) => {
+          {profile.map((results) => {
             return (
               <CardProduct
-                key={products.id}
-                product={products.product}
-                type={products.type}
-                description={products.description}
-                price={products.price}
+                key={results.id}
+                image={results.portfolioWorker.image}
+                type={results.portfolioWorker.type}
+                product={results.portfolioWorker.product}
+                description={results.portfolioWorker.description}
+                duration={`${results.portfolioWorker.duration} hora`}
+                price={results.portfolioWorker.price}
               />
             );
           })}
