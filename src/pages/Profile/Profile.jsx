@@ -12,6 +12,7 @@ import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 
 export const Profile = () => {
@@ -60,14 +61,21 @@ export const Profile = () => {
 
   useEffect(() => {
 
-
-    if (rdxToken) {
+    if (rdxToken !== "") {
+      const token = rdxToken.credentials.token;
+      const decoredToken = jwtDecode(token)
+      console.log(decoredToken)
+      if (decoredToken)
       // Realizamos la solicitud a la API con el token almacenado en Redux
-      profileUser(rdxToken.credentials.token)
+      profileUser(token)
         .then((results) => {
           setProfile(results.data.data);
           setOriginalProfile(results.data.data);
+          if (decoredToken.role === "admin") {
+console.log("Usuario es un trabajador. Realizar acciones adicionales.");
+          }
         })
+
         .catch((error) => {
           console.error(error);
         });
