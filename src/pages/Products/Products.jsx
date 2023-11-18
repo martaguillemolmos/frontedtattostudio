@@ -48,6 +48,7 @@ export const Products = () => {
                 duration={`${results.portfolioWorker.duration} hora`}
                 price={results.portfolioWorker.price}
               />
+              
             );
           })}
         </div>

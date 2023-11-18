@@ -1,6 +1,7 @@
-import { Card, Image, Text, Group, Badge, Center, Button } from '@mantine/core';
+import { Card, Image, Text, Group, Badge, Center} from '@mantine/core';
 import { IconFileDescription, IconClockHour2 } from '@tabler/icons-react';
 import classes from './CardProducts.css';
+import { ExampleModal } from '../Modal/Modal';
 
 export const FeaturesCard = ({  product, type, description,duration, image, price }) => {
     const mockdata = [
@@ -46,9 +47,11 @@ export const FeaturesCard = ({  product, type, description,duration, image, pric
             </Text>
           </div>
 
-          <Button radius="xl" style={{ flex: 1 }}>
-            Solicitar cita
-          </Button>
+          <div>
+            <ExampleModal />
+          </div>
+
+
         </Group>
       </Card.Section>
     </Card>
