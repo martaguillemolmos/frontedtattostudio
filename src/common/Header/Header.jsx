@@ -20,11 +20,9 @@ export const Header = () => {
     if (rdxToken.credentials !== "") {
       try {
         const token = rdxToken?.credentials?.token;
-        // console.log("soy el token", token);
         const decodificado = token ? jwtDecode(token) : "user";
         const roleToken = decodificado.role;
         setDecodificadoToken(roleToken);
-        // console.log("soy el rol del token?", roleToken);
       } catch (error) {
         console.log("Ay ay ay");
       }

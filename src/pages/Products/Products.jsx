@@ -11,21 +11,17 @@ export const Products = () => {
     if (portfolio.length === 0) {
       getAllproducts()
         .then((results) => {
-          setAllPortfolios("soy result.data",results.data);
+          setAllPortfolios(results.data);
           const searchData = results.data;
           console.log("soy search", searchData);
 
           const uniqueIds = {};
 
-            // Filtrar el array para eliminar duplicados basados en "product_id"
           const filteredData = searchData.filter((item) => {
-              // Verificar si el ID ya existe en el objeto uniqueIds
               if (!uniqueIds[item.product_id]) {
-                // Si no existe, marcarlo como visto y mantenerlo en el array resultante
                 uniqueIds[item.product_id] = true;
                 return true;
               }
-              // Si el ID ya existe, descartar el elemento duplicado
               return false;
             })
             setPortfolio(filteredData);
@@ -43,7 +39,7 @@ export const Products = () => {
             return (
               <FeaturesCard
                 key={results.id}
-                productId={results.product_id}
+                productId={results.id}
                 id={results.portfolioWorker.id}
                 image={results.portfolioWorker.image}
                 type={results.portfolioWorker.type}
