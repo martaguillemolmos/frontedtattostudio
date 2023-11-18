@@ -31,7 +31,13 @@ export const updateUser = (token, id, body) => {
     })
 }
 //Ver todos los usuarios
-
+export const getAllUsers = (token) => {
+    return axios.get (`http://localhost:4000/user`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
 // Productos
 export const getAllproducts = async () => {
     // Conectamos la API a la base de datos
