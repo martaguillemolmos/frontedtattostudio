@@ -39,7 +39,7 @@ export const Products = () => {
             return (
               <FeaturesCard
                 key={results.id}
-                productId={results.id}
+                productId={results.product_id}
                 id={results.portfolioWorker.id}
                 image={results.portfolioWorker.image}
                 type={results.portfolioWorker.type}
