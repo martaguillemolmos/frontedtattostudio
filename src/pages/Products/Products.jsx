@@ -5,19 +5,32 @@ import { CardProduct } from "../../common/CardProduct/CardProduct";
 
 export const Products = () => {
   const [profile, setProfile] = useState([]);
+  const [productId, setProductId] = useState(new Set());
 
   useEffect(() => {
     if (profile.length === 0) {
       getAllproducts()
         .then((results) => {
           setProfile(results.data);
-          const searchData = results.data
-          console.log("soy search",searchData)
-          })
-        
+          const searchData = results.data;
+          console.log("soy search", searchData);
+
+          // Filtramos los elementos de la array que hemos obtenido para crear un nuevo array
+          //que no tenga los id duplicados.
+          const uniqueProduct = results.data.filter(
+            (results) => !productId.has(results.portfolioWorker.id)
+          );
+          setProfile(uniqueProduct);
+
+          const updatedId = new Set([
+            ...productId,
+            ...uniqueProduct.map((results) => results.portfolioWorker.id),
+          ]);
+          setProductId(updatedId);
+        })
         .catch((error) => console.og(error));
-}
-  }, [profile]);
+    }
+  }, [profile, productId]);
 
   return (
     <div className="productsDesign">
@@ -27,6 +40,7 @@ export const Products = () => {
             return (
               <CardProduct
                 key={results.id}
+                id={results.portfolioWorker.id}
                 image={results.portfolioWorker.image}
                 type={results.portfolioWorker.type}
                 product={results.portfolioWorker.product}
