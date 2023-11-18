@@ -26,8 +26,8 @@ export const Products = () => {
             })
             setPortfolio(filteredData);
         })
-        .catch((error) => console.og(error));
-    }
+        .catch((error) => console.log(error));
+      }
   
   }, [portfolio]);
 

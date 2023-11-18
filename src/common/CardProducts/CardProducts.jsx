@@ -1,6 +1,6 @@
 import { Card, Image, Text, Group, Badge, Center} from '@mantine/core';
 import { IconFileDescription, IconClockHour2 } from '@tabler/icons-react';
-import classes from './CardProducts.css';
+import classes from './CardProducts.css?inline';
 import { ExampleModal } from '../Modal/Modal';
 import { useSelector } from 'react-redux';
 import { userData } from '../../pages/userSlice';
