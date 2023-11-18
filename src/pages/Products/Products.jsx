@@ -1,7 +1,7 @@
 import "./Products.css";
 import { useEffect, useState } from "react";
 import { getAllproducts } from "../../services/apiCalls";
-import { CardProduct } from "../../common/CardProduct/CardProduct";
+import { FeaturesCard } from "../../common/CardProducts/CardProducts";
 
 export const Products = () => {
   const [profile, setProfile] = useState([]);
@@ -38,7 +38,7 @@ export const Products = () => {
         <div className="productsRoster">
           {profile.map((results) => {
             return (
-              <CardProduct
+              <FeaturesCard
                 key={results.id}
                 id={results.portfolioWorker.id}
                 image={results.portfolioWorker.image}
