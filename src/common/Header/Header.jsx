@@ -58,6 +58,7 @@ export const Header = () => {
             ) : (
               <>
                 <LinkButton path={"/appointment"} title={"Todas citas"} />
+                <LinkButton path={"/user"} title={"Usuarios"} />
                 <LinkButton path={"/worker"} title={"Trabajadores"} />
               </>
             )}

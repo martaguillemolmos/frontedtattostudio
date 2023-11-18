@@ -1,5 +1,6 @@
 import axios from "axios";
 
+//Users
 //Register
 export const registerUser = async (body) => {
     //Conectamos la API a la base de datos
@@ -29,6 +30,7 @@ export const updateUser = (token, id, body) => {
         }
     })
 }
+//Ver todos los usuarios
 
 // Productos
 export const getAllproducts = async () => {
