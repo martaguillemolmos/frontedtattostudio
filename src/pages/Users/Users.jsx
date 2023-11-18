@@ -4,14 +4,13 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../../services/apiCalls";
+import { CardExample } from "../../common/CardUsers/CardExample/CardExample";
 
 export const Users = () => {
     const navigate = useNavigate();
     const rdxToken = useSelector(userData);
     const [users, setUsers] = useState([]);
     const [msgError, setMsgError] = useState("");
-
-
 
     useEffect (() => {
         if(rdxToken !== ""){
@@ -22,8 +21,8 @@ export const Users = () => {
                 
                 getAllUsers(token)
                 .then((results) => {
+                    console.log("esto", results.data)
                     setUsers(results.data);
-      
                   })
                   .catch((error) => {
                     if (error.response && error.response.data) {
@@ -45,19 +44,18 @@ export const Users = () => {
         <div className="usersDesign">
       {users.length > 0 ? (
         <div className="usersRoster">
-          {users.map((appointments) => {
-            return (
-              <CardAppointments
-                key={appointments.id}
-                client={appointments.client}
-                artist={appointments.artist}
-                portfolio={appointments.portfolio_id}
-                date={appointments.date}
-                status_appointment={appointments.status_appointment}
-                is_active={appointments.is_active}
-              />
+  {users.map((results) => {
+          return (
+            <CardExample
+            key ={results.id}
+            name ={results.name}
+            surname={results.surname}
+            role={results.role}
+            email={results.email}
+            phone={results.phone}
+             />
             );
-          })}
+        })}
         </div>
       ) : (
         <div>{msgError}</div>
