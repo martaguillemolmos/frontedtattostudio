@@ -19,7 +19,6 @@ export const Register = () => {
 
  const rdxCredentials = useSelector(userData);
 
-
   // Declaramos las credenciales que vamos a solicitar para poder realizar el register.
   const [registerData, setRegisterData] = useState({
     name: "",
