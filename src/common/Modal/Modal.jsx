@@ -8,20 +8,21 @@ import { CustomInput } from '../CustomInput/CustomInput';
 import CustomAlert from '../Alert/CustomAlert';
 import { useSelector } from 'react-redux';
 import { userData } from '../../pages/userSlice';
+import dayjs from 'dayjs';
 
 export const ExampleModal = ({allProducts, productValue}) => {
   const searchWorkers = allProducts.filter(product => product.product_id == productValue).map(value => ({ label: value.workerAppointment.users.name, value: value.id.toString() }));
   const [opened, { open, close }] = useDisclosure(false);
   const [ profolioId, setPortfolioId ] = useState('');
 
-
   const rdxToken = useSelector(userData);
 
   const [date, setDate] = useState ({
     date: "",
   })
-  console.log(date, "este es date")
   
+  console.log(date, "este es date")
+
   const [dateError, setDateError] = useState ({
     date: "",
   })
@@ -56,7 +57,20 @@ export const ExampleModal = ({allProducts, productValue}) => {
   }
 
   const handlerCita = () => {
-    console.log("CREAREMOS LA CITA", profolioId)
+    if(! date.date || dateError.data){
+setAlert({
+      show: true,
+      title: "Error de fecha",
+      message: "Por favor, ingrese una fecha válida.",
+    });
+    return;
+  }
+
+  // Formatear la fecha utilizando dayjs o cualquier otra biblioteca que prefieras
+  const formatDate = dayjs(date.date).format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A');
+
+  console.log("CREAREMOS LA CITA", profolioId, formatDate);
+
   }
 
 
@@ -88,7 +102,7 @@ export const ExampleModal = ({allProducts, productValue}) => {
  <div>Fecha</div>
       <CustomInput
         design={"inputDesign"}
-        type={"date"}
+        type={"datetime-local"}
         name={"date"}
         placeholder={""}
         value={""}
