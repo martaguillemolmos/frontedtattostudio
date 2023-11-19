@@ -1,31 +1,36 @@
-import { useDisclosure } from '@mantine/hooks';
-import { Modal, Button } from '@mantine/core';
-import "./Modal.css"
-import { useState } from 'react';
-import Select from 'react-select'
-import { validator } from '../../services/userful';
-import { CustomInput } from '../CustomInput/CustomInput';
-import CustomAlert from '../Alert/CustomAlert';
-import { useSelector } from 'react-redux';
-import { userData } from '../../pages/userSlice';
-import dayjs from 'dayjs';
+import { useDisclosure } from "@mantine/hooks";
+import { Modal, Button } from "@mantine/core";
+import "./Modal.css";
+import { useState } from "react";
+import Select from "react-select";
+import { validator } from "../../services/userful";
+import { CustomInput } from "../CustomInput/CustomInput";
+import CustomAlert from "../Alert/CustomAlert";
+import { useSelector } from "react-redux";
+import { userData } from "../../pages/userSlice";
+import dayjs from "dayjs";
 
-export const ExampleModal = ({allProducts, productValue}) => {
-  const searchWorkers = allProducts.filter(product => product.product_id == productValue).map(value => ({ label: value.workerAppointment.users.name, value: value.id.toString() }));
+export const ExampleModal = ({ allProducts, productValue }) => {
+  const searchWorkers = allProducts
+    .filter((product) => product.product_id == productValue)
+    .map((value) => ({
+      label: value.workerAppointment.users.name,
+      value: value.id.toString(),
+    }));
   const [opened, { open, close }] = useDisclosure(false);
-  const [ profolioId, setPortfolioId ] = useState('');
+  const [profolioId, setPortfolioId] = useState("");
 
   const rdxToken = useSelector(userData);
 
-  const [date, setDate] = useState ({
+  const [date, setDate] = useState({
     date: "",
-  })
-  
-  console.log(date, "este es date")
+  });
 
-  const [dateError, setDateError] = useState ({
+  console.log(date, "este es date");
+
+  const [dateError, setDateError] = useState({
     date: "",
-  })
+  });
   const [alert, setAlert] = useState({
     show: false,
     title: "",
@@ -51,66 +56,72 @@ export const ExampleModal = ({allProducts, productValue}) => {
   };
 
   const handlerSetValue = (id) => {
-    if(id){
+    if (id) {
       setPortfolioId(+id.value);
     }
-  }
+  };
 
   const handlerCita = () => {
-    if(! date.date || dateError.data){
-setAlert({
-      show: true,
-      title: "Error de fecha",
-      message: "Por favor, ingrese una fecha válida.",
-    });
-    return;
-  }
+    if (!date.date || dateError.data) {
+      setAlert({
+        show: true,
+        title: "Error de fecha",
+        message: "Por favor, ingrese una fecha válida.",
+      });
+      return;
+    }
 
-  // Formatear la fecha utilizando dayjs o cualquier otra biblioteca que prefieras
-  const formatDate = dayjs(date.date).format('{YYYY} MM-DDTHH:mm:ss SSS [Z] A');
+    const formatDate = dayjs(date.date).format(
+      "{YYYY} MM-DDTHH:mm:ss SSS [Z] A"
+    );
 
-  console.log("CREAREMOS LA CITA", profolioId, formatDate);
+    console.log("CREAREMOS LA CITA", profolioId, formatDate);
+    
+    const bodyAppointment = {
+      profolioId: profolioId,
+      date: formatDate,
+    }
 
-  }
-
+    console.log ("aquí deebría estar infor", bodyAppointment)
+  };
 
   return (
     <>
       <Modal.Root opened={opened} onClose={close} title="Solicitar cita">
-      <Modal.Overlay/>
-        <Modal.Content className='modalContent'>
-          <Modal.Header className='modal_header'>
-            <Modal.Title className='modal_headerTitle'>Cita</Modal.Title>
+        <Modal.Overlay />
+        <Modal.Content className="modalContent">
+          <Modal.Header className="modal_header">
+            <Modal.Title className="modal_headerTitle">Cita</Modal.Title>
             <Modal.CloseButton />
           </Modal.Header>
-          <Modal.Body className='modal_content'>
-          <Select options={searchWorkers} onChange={handlerSetValue} />
-      </Modal.Body>
-          <Modal.Body className='modal_content'>
-          <CustomAlert
-        title={alert.title}
-        showAlert={alert.show}
-        message={alert.message}
-        onClose={() =>
-          alertHandler({
-            show: false,
-            title: "",
-            message: "",
-          })
-        }
-      />
- <div>Fecha</div>
-      <CustomInput
-        design={"inputDesign"}
-        type={"datetime-local"}
-        name={"date"}
-        placeholder={""}
-        value={""}
-        functionProp={functionHandler}
-        functionBlur={errorCheck}
-      />
-      <div>{dateError.date}</div>
-      <Button onClick={handlerCita}>Crear cita</Button>
+          <Modal.Body className="modal_content">
+            <Select options={searchWorkers} onChange={handlerSetValue} />
+          </Modal.Body>
+          <Modal.Body className="modal_content">
+            <CustomAlert
+              title={alert.title}
+              showAlert={alert.show}
+              message={alert.message}
+              onClose={() =>
+                alertHandler({
+                  show: false,
+                  title: "",
+                  message: "",
+                })
+              }
+            />
+            <div>Fecha</div>
+            <CustomInput
+              design={"inputDesign"}
+              type={"datetime-local"}
+              name={"date"}
+              placeholder={""}
+              value={""}
+              functionProp={functionHandler}
+              functionBlur={errorCheck}
+            />
+            <div>{dateError.date}</div>
+            <Button onClick={handlerCita}>Crear cita</Button>
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>
@@ -118,4 +129,4 @@ setAlert({
       <Button onClick={open}>Open centered Modal</Button>
     </>
   );
-}
+};
