@@ -30,7 +30,7 @@ export const updateUser = (token, id, body) => {
 
 // Actualizar la contraseña 
 export const updatePassword = (token, body) => {
-    return axios.put (`http://localhost:4000/user/password`, body, {
+    return axios.patch (`http://localhost:4000/user/password`, body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

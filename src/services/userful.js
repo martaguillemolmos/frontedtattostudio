@@ -41,7 +41,7 @@ export const validator = (type, value) => {
         case 'passwordOld':
         case 'contraseña':
 
-            if(value !== undefined  && value.trim() !== "" && (value.length < 6 || value.length >12)){
+            if(value !== undefined  && value.trim() !== "" && (value.length < 6 || value.length > 12)){
                 return "La contraseña debe contener de 6 a 12 caracteres"
             } else {
                 return "";

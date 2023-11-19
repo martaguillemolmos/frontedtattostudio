@@ -1,19 +1,19 @@
-// import Stack from '@mui/material/Stack';
-// import Snackbar from '@mui/material/Snackbar';
-// import Alert from '@mui/material/Alert';
 
-// export const SimpleSnackbar = ({ message, snackOpen, onClose }) => {
-//     console.log("gola", snackOpen);
-//     console.log("mens", message);
-//     console.log("snakc", snackOpen);
-  
-//     return (
-//       <Stack spacing={2} sx={{ width: '100%' }}>
-//         <Snackbar open={snackOpen} autoHideDuration={6000} onClose={onClose}>
-//           <Alert onClose={onClose} severity="success" sx={{ width: '100%' }}>
-//             {message}
-//           </Alert>
-//         </Snackbar>
-//       </Stack>
-//     );
-//   };
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+export const SnackbarCustom = ({ open, handleClose, message, severity }) => {
+  return (
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <div>
+            <Alert onClose={handleClose} severity={severity}>
+                {message}
+            </Alert>
+        </div>
+    </Snackbar>
+  );
+};

@@ -11,7 +11,7 @@ import CustomAlert  from "../../common/Alert/CustomAlert";
 
 import { useDispatch, useSelector } from "react-redux";  
 import { login, userData } from "../userSlice";
-// import {SimpleSnackbar} from "../../common/Snackbar/Snackbar";
+import {SnackbarCustom} from "../../common/Snackbar/Snackbar";
 
 
 export const Login = () => {
@@ -21,8 +21,17 @@ export const Login = () => {
   const rdxCredentials = useSelector(userData);
 
   //Snackbar
-  // const [snackbarOpen, setSnackbarOpen] = useState(false);
-  // const [snackbarMessage, setSnackbarMessage] = useState('');
+   const [snackbarOpen, setSnackbarOpen] = useState(false);
+   const [snackbarMessage, setSnackbarMessage] = useState('');
+
+   const handlerCloseSnack = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setSnackbarOpen(false);
+    };
+
+   
 
   const [credenciales, setCredenciales] = useState({
     email: "",
@@ -64,34 +73,32 @@ export const Login = () => {
 
   useEffect(()=>{
     //Comprobamos si ya hay un token almacenado en Redux
+    console.log("entra aqui")
         if(rdxCredentials?.credentials.token){
           console.log(rdxCredentials)
           // setSnackbarOpen(false);
-          // setTimeout(() => {
           //Si ya contamos con un token, redirigimos al usuario a inicio.
           navigate("/profile");
-        // },20000)
+
         } 
-      },[rdxCredentials, navigate]);
+      }, []);
   
 
   //Declaramos la constante logMe para que, en caso de logearnos guarde el token y nos envíe al profile y por el contrario, nos muestre el error que nos impide hacerlo.
   const logMe = () => {
     console.log("errores",credencialesError);
     if(credenciales.email != "" && credenciales.password !="" ){
+
       logUser(credenciales)
       .then((resultado) => {
         console.log(resultado);
-        
+        setSnackbarOpen(true);
+        setSnackbarMessage(resultado.data.message);
           dispatch(login({ credentials: resultado.data}))
-          console.log("Mensajito",resultado.data.message)
-        //  if (setSnackbarOpen == true){
-        //     setSnackbarMessage(resultado.data.message);
-
-        //  }
+          console.log("Mensajito",resultado.data.message);
+          setTimeout(() => {
           navigate("/profile");
-    
-          
+         }, 3000);      
       })
       .catch((error) => {
         if (error.response.status !== 200){
@@ -163,9 +170,9 @@ export const Login = () => {
         </div>
         </div>
       </div>
-      {/* {snackbarOpen ? (
-  <SimpleSnackbar message={snackbarMessage} snackOpen={snackbarOpen} onClose={() => setSnackbarOpen(false)} />
-) : null} */}
+      { snackbarOpen ? (
+  <SnackbarCustom open={snackbarOpen} handleClose={handlerCloseSnack} message={snackbarMessage}/>
+) : null} 
 
     </div>
   );
