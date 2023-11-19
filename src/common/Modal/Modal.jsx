@@ -1,18 +1,24 @@
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import "./Modal.css"
+import { useState } from 'react';
+import Select from 'react-select'
 
-export const ExampleModal = ({allProducts, productId}) => {
-
+export const ExampleModal = ({allProducts, productValue}) => {
+  const searchWorkers = allProducts.filter(product => product.product_id == productValue).map(value => ({ label: value.workerAppointment.users.name, value: value.id.toString() }));
   const [opened, { open, close }] = useDisclosure(false);
-  const productValue = productId;
-  console.log("alProducts", allProducts);
-  console.log("prodcutId", productId);
+  const [ profolioId, setPortfolioId ] = useState('');
 
-    const searchWorkers = allProducts.filter(product => product.product_id == productValue).map(value => ({ workers: value.workerAppointment.users, portfolioId: value.id }));
-    console.log(searchWorkers);
+  const handlerSetValue = (id) => {
+    if(id){
+      setPortfolioId(+id.value);
+    }
+  }
 
- 
+  const handlerCita = () => {
+    console.log("CREAREMOS LA CITA", profolioId)
+  }
+
   return (
     <>
       <Modal.Root opened={opened} onClose={close} title="Solicitar cita">
@@ -23,10 +29,12 @@ export const ExampleModal = ({allProducts, productId}) => {
             <Modal.CloseButton />
           </Modal.Header>
           <Modal.Body className='modal_content'>
-    
+          <Select options={searchWorkers} onChange={handlerSetValue} />
       </Modal.Body>
-          <Modal.Body className='modal_content'>Modal content</Modal.Body>
-
+          <Modal.Body className='modal_content'>
+            {/* //AQUI VA EL CALENDARIO */}
+          <Button onClick={handlerCita}>Crear cita</Button>
+          </Modal.Body>
         </Modal.Content>
       </Modal.Root>
 

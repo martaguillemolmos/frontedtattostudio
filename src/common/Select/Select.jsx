@@ -1,13 +1,15 @@
 import { Select } from '@mantine/core';
 
-export const Selected = (workers) => {
+export const Selected = ({data, customOnChange}) => {
+
+  const defaultOnChange = (selected) => {
+    console.log('Seleccionado:', selected);
+  };
+  const onChangeHandler = customOnChange || defaultOnChange;
     return (
       <Select
-        label=""
-        placeholder= ""
-        data={[
-          { group: "", items: {workers} },
-        ]}
+        data={data}
+        onChange={onChangeHandler}
       />
     );
   }

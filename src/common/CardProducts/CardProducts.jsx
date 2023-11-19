@@ -19,7 +19,9 @@ export const FeaturesCard = ({ productId, product, type, description,duration, i
       <Text size="xs">{feature.label}</Text>
     </Center>
   ));
-
+  const productValue = productId;
+  const searchWorkers = allProducts.filter(product => product.product_id == productValue).map(value => ({ label: value.workerAppointment.users.name, value: value.id.toString() }));
+    console.log(searchWorkers)
   useEffect (() => {
     if(!rdxToken.credentials == ""){
       setModalShow(true)
@@ -63,7 +65,7 @@ export const FeaturesCard = ({ productId, product, type, description,duration, i
           </div>
 
           <div>
-           {rdxToken && modalShow && <ExampleModal allProducts={allProducts} productId={productId} />} 
+           {rdxToken && modalShow && <ExampleModal allProducts={allProducts} productValue={productValue}/>} 
           </div>
 
 
