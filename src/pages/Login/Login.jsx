@@ -13,35 +13,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, userData } from "../userSlice";
 
 export const Login = () => {
-  //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
+
   const navigate = useNavigate();
-
-  //Declaramos esta constante, que nos permitirá leer el contenido.
   const dispatch = useDispatch();
-
   const rdxCredentials = useSelector(userData);
 
-  
-  // Declaramos las credenciales que vamos a solicitar para poder realizar el login.
   const [credenciales, setCredenciales] = useState({
     email: "",
     password: "",
   });
 
-  //Declaramos las credenciales que vamos a solicitar junto + Error.
   const [credencialesError, setCredencialesError] = useState({
     emailError: null,
     passwordError: null,
   });
 
-  //Declaramos los atributos del objeto que controla la alerta.
   const [alert, setAlert] = useState({
     show:false,
     title:'',
     message: '',
   });
 
-  //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
   const alertHandler = (e) => {
     setAlert(e);
   }
@@ -53,7 +45,6 @@ export const Login = () => {
     }));
   };
 
-  //Declaramos la constante errorCheck para que dependiendo de la celda que nos de error, nos muestre el error correspondiente a la celda en cuestión.
   const errorCheck = (e) => {
     let error = "";
     error = validator(e.target.name, e.target.value);
@@ -63,13 +54,12 @@ export const Login = () => {
     }));
   };
 
-  //Utilizamos este useEffect para que, en el caso que alguien ya se haya logeado, no pueda acceder a esta vista.
   useEffect(()=>{
     //Comprobamos si ya hay un token almacenado en Redux
         if(rdxCredentials?.credentials.token){
           console.log(rdxCredentials)
           //Si ya contamos con un token, redirigimos al usuario a inicio.
-          navigate("/");
+          navigate("/profile");
         } 
       },[rdxCredentials, navigate]);
   
@@ -77,15 +67,15 @@ export const Login = () => {
   //Declaramos la constante logMe para que, en caso de logearnos guarde el token y nos envíe al profile y por el contrario, nos muestre el error que nos impide hacerlo.
   const logMe = () => {
     console.log("errores",credencialesError);
-    if(!credencialesError.emailError && !credencialesError.passwordError){
+    if(credencialesError.emailError != null && credencialesError.passwordError != null ){
       logUser(credenciales)
       .then((resultado) => {
         console.log(resultado);
         //Guardanos el token
         dispatch(login({ credentials: resultado.data}))
-
         //Una vez guardado el token,nos dirigimos a profile.
         setTimeout(() => {
+          
           navigate("/profile");
         }, 500);
       })
