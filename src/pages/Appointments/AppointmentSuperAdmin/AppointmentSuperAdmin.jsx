@@ -49,13 +49,13 @@ export const AppointmentSuperAdmin = () => {
           {appointments.map((appointments) => {
             return (
               <CardAppointments
-                key={appointments.id}
-                client={appointments.client}
-                artist={appointments.artist}
-                portfolio={appointments.portfolio_id}
-                date={appointments.date}
-                status_appointment={appointments.status_appointment}
-                is_active={appointments.is_active}
+              key={appointments.id}
+              client={appointments.client}
+              artist={`${appointments.workerAppointment.users.name} ${appointments.workerAppointment.users.surname}`}
+              portfolio={appointments.portfolio.product_id}
+              date={appointments.date}
+              status_appointment={appointments.status_appointment}
+              is_active={appointments.is_active}
               />
             );
           })}

@@ -35,7 +35,7 @@ const CardAppointments = ({
             <span className="infoValue">{artist}</span>
           </div>
           <div className="cardInfo">
-            <span className="infoLabel">Portfolio:</span>
+            <span className="infoLabel">Producto:</span>
             <span className="infoValue">{portfolio}</span>
           </div>
         </div>

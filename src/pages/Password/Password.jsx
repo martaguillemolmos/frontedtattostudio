@@ -5,12 +5,24 @@ import { useEffect, useState } from "react";
 import { updatePassword } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
+import CustomAlert from "../../common/Alert/CustomAlert";
 
 export const Password = () => {
   const navigate = useNavigate();
   const rdxToken = useSelector(userData);
-  const [message, setMessage] = useState("");
+
   const dispatch = useDispatch();
+  //Declaramos los atributos del objeto que controla la alerta.
+  const [alert, setAlert] = useState({
+    show: false,
+    title: "",
+    message: "",
+  });
+
+  //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
+  const alertHandler = (e) => {
+    setAlert(e);
+  };
 
   const [newPassword, setNewPassword] = useState({
     passwordOld: "",
@@ -51,25 +63,40 @@ export const Password = () => {
       const token = rdxToken.credentials.token;
       console.log(token);
       updatePassword(token, newPassword)
-        .then((results) => {
-          const { message } = results.data;
-          setMessage(message);
-          if (message != "") {
-            setTimeout(() => {
+        .then(() => {
+            //Añadir control Snackbar
               dispatch(logout({ credentials: "" }));
               navigate("/");
-            });
           }
-        })
+        )
         .catch((error) => {
-          console.log(error);
-        });
+            if (error.response.status !== 200) {
+              console.log(error.response);
+              alertHandler({
+                show: true,
+                title: `Error ${error.response.status}`,
+                message: `${error.response.data}`,
+              });
+           }
+          });
     }
     console.log(newPassword);
   };
 
   return (
     <>
+      <CustomAlert
+        title={alert.title}
+        showAlert={alert.show}
+        message={alert.message}
+        onClose={() =>
+          alertHandler({
+            show: false,
+            title: "",
+            message: "",
+          })
+        }
+      />
       Contraseña actual
       <CustomInput
         design={"inputDesign"}
