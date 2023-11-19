@@ -16,7 +16,8 @@ export const AppointmentSuperAdmin = () => {
 
    useEffect (() => {
     console.log("aqui entra")
-    if(rdxToken !== "" || {}){
+    if(rdxToken !== ""){
+      console.log("aqui tambien 1")
         const token = rdxToken.credentials.token;
         const decoredToken =jwtDecode(token)
         console.log(decoredToken)
@@ -24,7 +25,7 @@ export const AppointmentSuperAdmin = () => {
             getAllAppointments(token)
             .then((results) => {
                 setAppointments(results.data);
-  
+                console.log("esto es results", results)
               })
               .catch((error) => {
                 if (error.response && error.response.data) {
@@ -45,19 +46,45 @@ export const AppointmentSuperAdmin = () => {
    }, [rdxToken, navigate])
 
     return (
-        <div className="appointmentsDesign">
+      <>
+       <div className="appointmentsDesign">
+      Hola!
+      {appointments.length > 0 ? (
+        <div>Sí
+          <div>
+            {appointments.map((results) => {
+              return (
+                <CardAppointments
+                key={results.id}
+                client={results.client}
+                artist={results.artist}
+                portfolio={results.portfolio.product_id}
+                date={results.date}
+                status_appointment={results.status_appointment}
+                is_active={results.is_active}
+              />
+              )
+            })}
+          </div>
+        </div>
+      )
+    : (
+      <div>Mal</div>
+    )}
+      </div>
+      {/* <div className="appointmentsDesign">
       {appointments.length > 0 ? (
         <div className="appointmentsRoster">
-          {appointments.map((appointments) => {
+          {appointments.map((appointment) => {
             return (
               <CardAppointments
-              key={appointments.id}
-              client={appointments.client}
-              artist={`${appointments.workerAppointment.users.name} ${appointments.workerAppointment.users.surname}`}
-              portfolio={appointments.portfolio.product_id}
-              date={appointments.date}
-              status_appointment={appointments.status_appointment}
-              is_active={appointments.is_active}
+              key={appointment.id}
+              client={appointment.client}
+              artist={`${appointment.workerAppointment.users.name} ${appointments.workerAppointment.users.surname}`}
+              portfolio={appointment.portfolio.product_id}
+              date={appointment.date}
+              status_appointment={appointment.status_appointment}
+              is_active={appointment.is_active}
               />
             );
           })}
@@ -65,6 +92,8 @@ export const AppointmentSuperAdmin = () => {
       ) : (
         <div>{msgError}</div>
       )}
-      </div>
+      </div> */}
+      </>
+      
   );
 };
