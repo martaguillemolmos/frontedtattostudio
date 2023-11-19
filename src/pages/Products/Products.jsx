@@ -7,6 +7,7 @@ export const Products = () => {
   const [allPortfolios, setAllPortfolios] = useState([]);
   const [portfolio, setPortfolio] = useState([]);
 
+  
   useEffect(() => {
     if (portfolio.length === 0) {
       getAllproducts()

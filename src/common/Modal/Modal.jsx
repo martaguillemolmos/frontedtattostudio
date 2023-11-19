@@ -1,7 +1,7 @@
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Button } from "@mantine/core";
 import "./Modal.css";
-import { useState } from "react";
+import {  useState } from "react";
 import Select from "react-select";
 import { validator } from "../../services/userful";
 import { CustomInput } from "../CustomInput/CustomInput";
@@ -9,8 +9,10 @@ import CustomAlert from "../Alert/CustomAlert";
 import { useSelector } from "react-redux";
 import { userData } from "../../pages/userSlice";
 import dayjs from "dayjs";
+import { createAppointment } from "../../services/apiCalls";
 
 export const ExampleModal = ({ allProducts, productValue }) => {
+
   const searchWorkers = allProducts
     .filter((product) => product.product_id == productValue)
     .map((value) => ({
@@ -55,6 +57,7 @@ export const ExampleModal = ({ allProducts, productValue }) => {
     }));
   };
 
+
   const handlerSetValue = (id) => {
     if (id) {
       setPortfolioId(+id.value);
@@ -71,20 +74,32 @@ export const ExampleModal = ({ allProducts, productValue }) => {
       return;
     }
 
-    const formatDate = dayjs(date.date).format(
-      "{YYYY} MM-DDTHH:mm:ss SSS [Z] A"
-    );
+    const formatDate = dayjs(date.date).toISOString();
 
     console.log("CREAREMOS LA CITA", profolioId, formatDate);
     
     const bodyAppointment = {
-      profolioId: profolioId,
+      portfolio_id: profolioId,
       date: formatDate,
     }
 
     console.log ("aquí deebría estar infor", bodyAppointment)
+
+      if (Object.keys(bodyAppointment).length > 0){
+
+        console.log("así se comprueba si esta vacio o no, aquí no")
+        const token = rdxToken.credentials.token;
+      console.log("yo soy tu token", token)
+
+      createAppointment(token, bodyAppointment).then(resp => {
+        console.log(resp)
+      }).catch(er => console.log(er))
+
+      }
+    
   };
 
+ 
   return (
     <>
       <Modal.Root opened={opened} onClose={close} title="Solicitar cita">
@@ -121,12 +136,12 @@ export const ExampleModal = ({ allProducts, productValue }) => {
               functionBlur={errorCheck}
             />
             <div>{dateError.date}</div>
-            <Button onClick={handlerCita}>Crear cita</Button>
+            <Button disabled={!date && !profolioId} onClick={handlerCita}>Crear cita</Button>
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>
 
-      <Button onClick={open}>Open centered Modal</Button>
+      <Button  onClick={open}>Open centered Modal</Button>
     </>
   );
 };

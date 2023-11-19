@@ -64,13 +64,14 @@ export const getAllAppointments = async (token) => {
     });
 }
 
-//Crear appointment
+// Crear appointment
 export const createAppointment = async (token, body) => {
     // Conectamos la API a la base de datos
-    return await axios.post (`http://localhost:4000/appointment`, {
+    console.log("El token en la llamada",token)
+    return await axios.post('http://localhost:4000/appointment', body, {
         headers: {
             'Authorization': `Bearer ${token}`
-        }, body
+        }
     });
 }
 
