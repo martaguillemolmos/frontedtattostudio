@@ -15,7 +15,8 @@ export const AppointmentSuperAdmin = () => {
 
 
    useEffect (() => {
-    if(rdxToken !== ""){
+    console.log("aqui entra")
+    if(rdxToken !== "" || {}){
         const token = rdxToken.credentials.token;
         const decoredToken =jwtDecode(token)
         console.log(decoredToken)
@@ -28,7 +29,7 @@ export const AppointmentSuperAdmin = () => {
               .catch((error) => {
                 if (error.response && error.response.data) {
                   // Si tenemos un mensaje en response.data, lo mostramos
-                  setMsgError(error.response.data);
+                  console.log(error);
                 } else {
                   // Si no tenemos un mensaje en response.data
                   setMsgError("Hubo un error al cargar las citas.");
@@ -38,6 +39,7 @@ export const AppointmentSuperAdmin = () => {
             navigate ("/")
         }
     } else {
+      console.log("redirigir")
         navigate ("/")
     }
    }, [rdxToken, navigate])

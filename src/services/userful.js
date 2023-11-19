@@ -36,6 +36,7 @@ export const validator = (type, value) => {
             } else {
                 return "";
             }
+        
         // Validación del password
         case 'password':
         case 'passwordOld':

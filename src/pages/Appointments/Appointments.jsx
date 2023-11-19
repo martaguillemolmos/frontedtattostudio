@@ -9,7 +9,6 @@ import {
 import CardAppointments from "../../common/CardAppointments/CardAppointments";
 import { jwtDecode } from "jwt-decode";
 import { TabBar } from "../../common/TabBar/TabBar";
-// import { setAppointment } from "../appointmentSlice";
 
 export const Appointments = () => {
   const navigate = useNavigate();
@@ -69,8 +68,9 @@ export const Appointments = () => {
         navigate("/appointment");
       }
     } else {
+      console.log("redirigir")
       // Si no contamos con un token, redirigimos al usuario a login.
-      navigate("/login");
+      navigate("/");
     }
   }, [rdxToken]);
   

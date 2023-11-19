@@ -8,21 +8,13 @@ import { validator } from "../../services/userful";
 import CustomAlert from "../../common/Alert/CustomAlert";
 
 export const Password = () => {
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const rdxToken = useSelector(userData);
 
-  const dispatch = useDispatch();
-  //Declaramos los atributos del objeto que controla la alerta.
-  const [alert, setAlert] = useState({
-    show: false,
-    title: "",
-    message: "",
-  });
 
-  //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
-  const alertHandler = (e) => {
-    setAlert(e);
-  };
 
   const [newPassword, setNewPassword] = useState({
     passwordOld: "",
@@ -32,11 +24,24 @@ export const Password = () => {
     passwordOld: "",
     password: "",
   });
-  useEffect(() => {
-    if (rdxToken == "") {
-      navigate("/login");
-    }
-  }, [rdxToken, navigate]);
+
+    //Declaramos los atributos del objeto que controla la alerta.
+    const [alert, setAlert] = useState({
+        show: false,
+        title: "",
+        message: "",
+      });
+    
+      //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
+      const alertHandler = (e) => {
+        setAlert(e);
+      };
+
+//   useEffect(() => {
+//     if (rdxToken == "") {
+//       navigate("/");
+//     }
+//   }, [rdxToken]);
 
   const functionHandler = (e) => {
     setNewPassword((prevState) => ({
@@ -84,7 +89,7 @@ export const Password = () => {
   };
 
   return (
-    <>
+    <div>
       <CustomAlert
         title={alert.title}
         showAlert={alert.show}
@@ -121,9 +126,9 @@ export const Password = () => {
         functionBlur={errorCheck}
       />
       <div>{newPasswordError.password}</div>
-      <div className="linkButtonDesign" onClick={() => Update()}>
+      <div className="linkButtonDesign" onClick={Update}>
         Cambiar contraseña
       </div>
-    </>
+    </div>
   );
 };

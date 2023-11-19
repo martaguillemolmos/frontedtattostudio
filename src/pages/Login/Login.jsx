@@ -98,7 +98,7 @@ export const Login = () => {
           console.log("Mensajito",resultado.data.message);
           setTimeout(() => {
           navigate("/profile");
-         }, 3000);      
+         }, 1000);      
       })
       .catch((error) => {
         if (error.response.status !== 200){
