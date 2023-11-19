@@ -1,20 +1,17 @@
 import axios from "axios";
 
-//Users
-//Register
+//Usuuario
+//Registrar
 export const registerUser = async (body) => {
-    //Conectamos la API a la base de datos
     return await axios.post (`http://localhost:4000/user`, body) 
 }
 
 //Login
 export const logUser = async (body) => {
-    //Conectamos la API a la base de datos
     return await axios.post (`http://localhost:4000/user/login`, body) 
 }
 
-//Profile
-// Mostramos los datos del usuario.
+// Perfil: Mostramos los datos del usuario.
 export const profileUser = (token) => {
     return axios.get (`http://localhost:4000/user/profile`, {
         headers: {
@@ -22,7 +19,7 @@ export const profileUser = (token) => {
         }
     })
 }
-// Actualizamos los datos del usuario
+// Perfil: Actualizamos los datos del usuario
 export const updateUser = (token, id, body) => {
     return axios.put (`http://localhost:4000/user/${id}`, body, {
         headers: {
@@ -30,6 +27,16 @@ export const updateUser = (token, id, body) => {
         }
     })
 }
+
+// Actualizar la contraseña 
+export const updatePassword = (token, body) => {
+    return axios.put (`http://localhost:4000/user/password`, body, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
 //Ver todos los usuarios
 export const getAllUsers = (token) => {
     return axios.get (`http://localhost:4000/user`, {
