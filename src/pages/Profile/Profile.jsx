@@ -13,6 +13,7 @@ import { validator } from "../../services/userful";
 
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { LinkButton } from "../../common/LinkButton/LinkButton";
 
 
 export const Profile = () => {
@@ -187,11 +188,11 @@ export const Profile = () => {
       )}
       <div> 
 
-        Contraseña
-        <div>Si eligues una contraseña segura, ayudas a proteger tu cuenta.
-          <div>Cambiar contraseña</div>
-        </div>
-
+      <div>
+      Contraseña
+      <LinkButton path={"/password"} title={"Ir password"} />
+      </div>
+     
         Otras opciones
         <div>Desactiva tu cuenta 
           <div className="deleteAccount" onClick={() => desactiveAccount}>Desactivar</div></div>
