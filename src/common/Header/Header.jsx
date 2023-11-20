@@ -49,7 +49,7 @@ export const Header = () => {
           </>
         ) : (
           <>
-            <LinkButton path={"/profile"} title={rdxToken.credentials.name} />
+            <LinkButton path={"/profile"} title={"Perfil"} />
             {/* Si estás registrado pero no eres super_admin */}
             {decodificadoToken !== "super_admin" ? (
               <>

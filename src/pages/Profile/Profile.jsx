@@ -2,8 +2,8 @@ import "./Profile.css";
 import { useEffect, useState } from "react";
 
 // //Importamos Redux
-import { useSelector } from "react-redux";
-import { userData } from "../userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { userData,login } from "../userSlice";
 
 //Importamos las rutas
 import {
@@ -20,12 +20,11 @@ import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
 
 export const Profile = () => {
-  console.log("hola")
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
   const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
-  console.log(rdxToken, "soy rdxtoken")
+
   //Instanciar Redux en escritura
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
@@ -126,11 +125,11 @@ export const Profile = () => {
 
   const sendData = () => {
     if (profileChange()) {
-      console.log(profile);
       const userId = profile.id;
 
       updateUser(rdxToken.credentials.token, userId, profile)
         .then(() => {
+          
           console.log(
             `Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`
           );
