@@ -13,9 +13,11 @@ export const validator = (type, value) => {
 
             if ( value !== undefined && value.trim() !== "" && value.length > 50 && emailRegex.test(value)) {
                 return "Formato de email incorrecto. Recuerda: Número máx. de caracteres 50.";
-            } else {
-                return "";
+            } else if (! /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value)) {
+              return "Formato de email incorrecto." 
             }
+            
+            return "";
         
         //Validación del name y surname
         case 'name':

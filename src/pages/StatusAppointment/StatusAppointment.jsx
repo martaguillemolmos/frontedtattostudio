@@ -71,6 +71,7 @@ export const StatusAppointment = () => {
           name={"id"}
           placeholder={""}
           value={""}
+          maxLength={"4"}
           functionProp={functionHandler}
           functionBlur={errorCheck}
         />
@@ -82,6 +83,7 @@ export const StatusAppointment = () => {
         name={"status_appointment"}
         placeholder={""}
         value={""}
+        maxLength={"10"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />

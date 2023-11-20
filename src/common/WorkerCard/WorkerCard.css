@@ -1,4 +1,4 @@
-.card-artist {
+.card {
     position: relative;
     border-radius: 1em;
     overflow: hidden;
@@ -10,12 +10,12 @@
     cursor: pointer;
   }
   
-  .card-artist:hover {
+  .card:hover {
     transform: scale(1.05);
     filter: grayscale(0%);
   }
   
-  .card-artist-content {
+  .card-content {
     position: absolute;
     top: 0;
     left: 0;
@@ -28,17 +28,17 @@
     transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   
-  .card-artist:hover .card-artist-content {
+  .card:hover .card-content {
     transform: rotateX(-9deg);
   }
   
-  .card-artist-title {
+  .card-title {
     margin: 0;
     font-size: 2em;
     color: #ffffff;
   }
   
-  .card-artist-description {
+  .card-description {
     margin: 0.6em 0 0;
     font-size: 1.25em;
     color: #ffffff;

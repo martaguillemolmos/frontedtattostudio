@@ -172,6 +172,7 @@ export const Profile = () => {
         name={"name"}
         placeholder={""}
         value={profile.name}
+        maxLength={"25"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -183,6 +184,7 @@ export const Profile = () => {
         type={"text"}
         name={"surname"}
         placeholder={""}
+        maxLength={"25"}
         value={profile.surname}
         functionProp={functionHandler}
         functionBlur={errorCheck}
@@ -210,6 +212,7 @@ export const Profile = () => {
         type={"email"}
         name={"email"}
         placeholder={""}
+        maxLength={"50"}
         value={profile.email}
         functionProp={functionHandler}
         functionBlur={errorCheck}
@@ -237,6 +240,7 @@ export const Profile = () => {
         type={"text"}
         name={"formation"}
         placeholder={""}
+        maxLength={"200"}
         value={infWorker.formation}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}
@@ -250,6 +254,7 @@ export const Profile = () => {
         type={"text"}
         name={"experience"}
         placeholder={""}
+        maxLength={"200"}
         value={infWorker.experience}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}

@@ -126,6 +126,7 @@ export const Register = () => {
         name={"name"}
         placeholder={""}
         value={""}
+        maxLength={"25"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -138,6 +139,7 @@ export const Register = () => {
         name={"surname"}
         placeholder={""}
         value={""}
+        maxLength={"25"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -164,6 +166,7 @@ export const Register = () => {
         name={"email"}
         placeholder={""}
         value={""}
+        maxLength={"50"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
@@ -176,6 +179,7 @@ export const Register = () => {
         name={"password"}
         placeholder={""}
         value={""}
+        maxLength={"12"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />

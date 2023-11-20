@@ -155,7 +155,7 @@ export const ExampleModal = ({ allProducts, productValue }) => {
         </Modal.Content>
       </Modal.Root>
 
-      <Button onClick={open}>Open centered Modal</Button>
+      <Button onClick={open}>Crear una cita</Button>
     </>
   );
 };

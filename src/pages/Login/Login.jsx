@@ -87,7 +87,7 @@ export const Login = () => {
   //Declaramos la constante logMe para que, en caso de logearnos guarde el token y nos envíe al profile y por el contrario, nos muestre el error que nos impide hacerlo.
   const logMe = () => {
     console.log("errores",credencialesError);
-    if(credenciales.email != "" && credenciales.password !="" ){
+    if(credenciales.email != "" && credenciales.password !="" && credencialesError.emailError == "" && credencialesError.passwordError =="" ){
 
       logUser(credenciales)
       .then((resultado) => {

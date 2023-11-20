@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(245, 245, 27);
+    background-color: beige;
     gap: 1em;
 }
 
@@ -18,7 +18,7 @@
     width: 8em;
 
     border-radius: 1em;
-    background-color: rgb(20, 173, 220);
+    background-color: rgb(220, 147, 20);
     color: white;
     font-weight: bolder;
 
