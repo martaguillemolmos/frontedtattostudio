@@ -91,6 +91,8 @@ export const StatusAppointment = () => {
       <div className="editDesign" onClick={() => changeStatus()}>
         Modifica cita
     </div>
+      Posibles opciones: 
+      pending , approved , canceled , made
         </div>
     )
 }
