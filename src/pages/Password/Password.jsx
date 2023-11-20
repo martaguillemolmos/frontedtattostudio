@@ -37,11 +37,11 @@ export const Password = () => {
         setAlert(e);
       };
 
-//   useEffect(() => {
-//     if (rdxToken == "") {
-//       navigate("/");
-//     }
-//   }, [rdxToken]);
+  useEffect(() => {
+    if (rdxToken == "") {
+      navigate("/");
+    }
+  }, [rdxToken]);
 
   const functionHandler = (e) => {
     setNewPassword((prevState) => ({

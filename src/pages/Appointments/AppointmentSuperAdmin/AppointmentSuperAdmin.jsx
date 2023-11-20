@@ -6,14 +6,35 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { getAllAppointments } from "../../../services/apiCalls";
 import CardAppointments from "../../../common/CardAppointments/CardAppointments";
+import { TabBar } from "../../../common/TabBar/TabBar";
 
 export const AppointmentSuperAdmin = () => {
     const navigate = useNavigate();
     const rdxToken = useSelector(userData);
     const [appointments, setAppointments] = useState([]);
+    const [allAppointments, setAllAppointments] = useState([])
     const [msgError, setMsgError] = useState("");
+    const [tabValue, setTabValue] = useState('null');
+    const customTabs = [
+      { label: 'Todos', value: 'null'},
+      { label: 'Aprobadas', value: 'approved' },
+      { label: 'Pendientes', value: 'pending'  },
+      { label: 'Canceladas', value: 'canceled'  },
+      { label: 'Finalizadas', value: 'made'  },
+    ];
 
-
+    const handlerTab = (event, newValue) => {
+      setTabValue(newValue);
+      if( newValue === 'null'){
+  
+        setAppointments(allAppointments);
+        return
+      }
+  
+      const filterAppointments = allAppointments.filter( appo => appo.status_appointment === newValue )
+      setAppointments(filterAppointments);
+    
+    };
    useEffect (() => {
     console.log("aqui entra")
     if(rdxToken !== ""){
@@ -24,9 +45,14 @@ export const AppointmentSuperAdmin = () => {
         if (decoredToken.role == "super_admin"){
             getAllAppointments(token)
             .then((results) => {
-                setAppointments(results.data);
-                console.log("esto es results", results)
-              })
+              if(Array.isArray(results.data)){
+                setAllAppointments(results.data);
+                setAppointments(results.data)
+                console.log(results.data)
+              } else {
+                setMsgError("No tienes citas agendadas")
+              }
+            })
               .catch((error) => {
                 if (error.response && error.response.data) {
                   // Si tenemos un mensaje en response.data, lo mostramos
@@ -47,12 +73,11 @@ export const AppointmentSuperAdmin = () => {
 
     return (
       <>
+      <TabBar tabs={customTabs} value={tabValue} handler={handlerTab} />
        <div className="appointmentsDesign">
-      Hola!
       {appointments.length > 0 ? (
-        <div>Sí
-          <div>
-            {appointments.map((results) => {
+        <div>
+         {appointments.map((results) => {
               return (
                 <CardAppointments
                 key={results.id}
@@ -66,33 +91,11 @@ export const AppointmentSuperAdmin = () => {
               )
             })}
           </div>
-        </div>
       )
     : (
-      <div>Mal</div>
+      <div>{msgError}</div>
     )}
       </div>
-      {/* <div className="appointmentsDesign">
-      {appointments.length > 0 ? (
-        <div className="appointmentsRoster">
-          {appointments.map((appointment) => {
-            return (
-              <CardAppointments
-              key={appointment.id}
-              client={appointment.client}
-              artist={`${appointment.workerAppointment.users.name} ${appointments.workerAppointment.users.surname}`}
-              portfolio={appointment.portfolio.product_id}
-              date={appointment.date}
-              status_appointment={appointment.status_appointment}
-              is_active={appointment.is_active}
-              />
-            );
-          })}
-        </div>
-      ) : (
-        <div>{msgError}</div>
-      )}
-      </div> */}
       </>
       
   );

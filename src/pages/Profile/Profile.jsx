@@ -6,7 +6,11 @@ import { useSelector } from "react-redux";
 import { userData } from "../userSlice";
 
 //Importamos las rutas
-import { profileUser, updateUser } from "../../services/apiCalls";
+import {
+  profileUser,
+  profileWorker,
+  updateUser,
+} from "../../services/apiCalls";
 
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
@@ -15,10 +19,9 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
 
-
 export const Profile = () => {
-   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
- const navigate = useNavigate();
+  //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
+  const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
 
@@ -40,12 +43,29 @@ export const Profile = () => {
     is_active: "",
   });
 
+  const [infWorker, setInfWorker] = useState({
+    formation: "",
+    experience: "",
+  });
+
+  const [infWorkerError, setInfWorkerError] = useState({
+    formation: "",
+    experience: "",
+  });
+
   const [isEnabled, setIsEnabled] = useState(true);
 
   const [originalProfile, setOriginalProfile] = useState(false);
 
   const functionHandler = (e) => {
     setProfile((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const functionHandlerWorker = (e) => {
+    setInfWorker((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
@@ -60,31 +80,47 @@ export const Profile = () => {
     }));
   };
 
-  useEffect(() => {
+  const errorCheckWorker = (e) => {
+    let error = "";
+    error = validator(e.target.name, e.target.value);
+    setInfWorkerError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }));
+  };
 
+  useEffect(() => {
     if (rdxToken !== "") {
       const token = rdxToken.credentials.token;
-      const decoredToken = jwtDecode(token)
-      console.log(decoredToken)
-      if (decoredToken)
-      // Realizamos la solicitud a la API con el token almacenado en Redux
-      profileUser(token)
-        .then((results) => {
-          setProfile(results.data.data);
-          setOriginalProfile(results.data.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      const decoredToken = jwtDecode(token);
+      console.log(decoredToken);
+      if (decoredToken.role !== "admin") {
+        // Realizamos la solicitud a la API con el token almacenado en Redux
+        profileUser(token)
+          .then((results) => {
+            setProfile(results.data.data);
+            setOriginalProfile(results.data.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } else {
+        profileWorker(token)
+          .then((results) => {
+            console.log(infWorker);
+            setInfWorker(results.data);
+            console.log("este es el data del worker", results.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     } else {
-     //Si no contamos con un token, redirigimos al usuario a inicio.
-     navigate("/");
+      //Si no contamos con un token, redirigimos al usuario a inicio.
+      navigate("/");
     }
- 
-    
-  }, [rdxToken, navigate]);
+  }, [rdxToken]);
 
-  //Guardamos de nuevo todos los datos, independientemente de si se modifican o no.
   const sendData = () => {
     if (profileChange()) {
       console.log(profile);
@@ -92,21 +128,29 @@ export const Profile = () => {
 
       updateUser(rdxToken.credentials.token, userId, profile)
         .then(() => {
-          console.log(`Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`);
+          console.log(
+            `Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`
+          );
         })
         .catch((error) => {
-          console.log("Aquí quiero recuperar el error de la base de datos.", error);
+          console.log(
+            "Aquí quiero recuperar el error de la base de datos.",
+            error
+          );
         });
       setTimeout(() => {
         setIsEnabled(true);
       }, 1000);
-    }else {
-        console.log(`${profile.name}, no se han actualizado los campos porque no se ha modificado ningún campo.`);
-        profileChange(false);
-      }
-      setIsEnabled(true);
+    } else {
+      console.log(
+        `${profile.name}, no se han actualizado los campos porque no se ha modificado ningún campo.`
+      );
+      profileChange(false);
+    }
+    setIsEnabled(true);
   };
 
+  
   const profileChange = () => {
     return (
       profile.name !== originalProfile.name ||
@@ -115,13 +159,6 @@ export const Profile = () => {
       profile.email !== originalProfile.email
     );
   };
-
-  const desactiveAccount = () => {
-    return(
-      profile.is_active = false
-    )
-  }
-  
 
   return (
     <div className="profileDesign">
@@ -186,17 +223,37 @@ export const Profile = () => {
           Enviar cambios
         </div>
       )}
-      <div> 
-
       <div>
-      Contraseña
-      <LinkButton path={"/password"} title={"Ir password"} />
+        <div>
+          Contraseña
+          <LinkButton path={"/password"} title={"Ir password"} />
+        </div>
       </div>
-     
-        Otras opciones
-        <div>Desactiva tu cuenta 
-          <div className="deleteAccount" onClick={() => desactiveAccount}>Desactivar</div></div>
-        
+      <div>
+      <CustomInput
+        disabled={isEnabled}
+        design={"inputDesign"}
+        type={"text"}
+        name={"formation"}
+        placeholder={""}
+        value={infWorker.formation}
+        functionProp={functionHandlerWorker}
+        functionBlur={errorCheckWorker}
+      />
+        <div>{infWorkerError.formation}</div>
+
+        <CustomInput
+        disabled={isEnabled}
+        design={"inputDesign"}
+        type={"text"}
+        name={"experience"}
+        placeholder={""}
+        value={infWorker.experience}
+        functionProp={functionHandlerWorker}
+        functionBlur={errorCheckWorker}
+      />
+        <div>{infWorkerError.experience}</div>
+      
       </div>
     </div>
   );
