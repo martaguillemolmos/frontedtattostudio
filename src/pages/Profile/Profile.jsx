@@ -55,6 +55,8 @@ export const Profile = () => {
 
   const [isEnabled, setIsEnabled] = useState(true);
 
+  const [workerEnabled, setWorkerEnabled] = useState(true);
+ 
   const [originalProfile, setOriginalProfile] = useState(false);
 
   const functionHandler = (e) => {
@@ -150,7 +152,7 @@ export const Profile = () => {
     setIsEnabled(true);
   };
 
-  
+
   const profileChange = () => {
     return (
       profile.name !== originalProfile.name ||
@@ -231,7 +233,7 @@ export const Profile = () => {
       </div>
       <div>
       <CustomInput
-        disabled={isEnabled}
+        disabled={workerEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"formation"}
@@ -239,11 +241,12 @@ export const Profile = () => {
         value={infWorker.formation}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}
+        display={rdxToken.role === 'admin'}
       />
         <div>{infWorkerError.formation}</div>
 
         <CustomInput
-        disabled={isEnabled}
+        disabled={workerEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"experience"}
@@ -251,6 +254,7 @@ export const Profile = () => {
         value={infWorker.experience}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}
+        display={rdxToken.role === 'admin'}
       />
         <div>{infWorkerError.experience}</div>
       

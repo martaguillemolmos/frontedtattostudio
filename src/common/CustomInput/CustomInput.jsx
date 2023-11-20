@@ -1,8 +1,9 @@
 import "./CustomInput.css"
 
-export const CustomInput = ({disabled, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
+export const CustomInput = ({disabled,display, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
     return (
         <input 
+        display={display}
         disabled={disabled}
         className={design}
         type={type}
