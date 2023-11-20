@@ -54,8 +54,6 @@ export const Profile = () => {
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
-
-  const [workerEnabled, setWorkerEnabled] = useState(true);
  
   const [originalProfile, setOriginalProfile] = useState(false);
 
@@ -96,7 +94,7 @@ export const Profile = () => {
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
       console.log(decoredToken);
-      if (decoredToken.role !== "admin") {
+      if (decoredToken.role) {
         // Realizamos la solicitud a la API con el token almacenado en Redux
         profileUser(token)
           .then((results) => {
@@ -106,17 +104,18 @@ export const Profile = () => {
           .catch((error) => {
             console.error(error);
           });
-      } else {
-        profileWorker(token)
-          .then((results) => {
-            console.log(infWorker);
-            setInfWorker(results.data);
-            console.log("este es el data del worker", results.data);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+          if(decoredToken.role == "super_admin"){
+            profileWorker(token)
+            .then((results) => {
+              console.log(infWorker);
+              setInfWorker(results.data);
+              console.log("este es el data del worker", results.data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          }
+      } 
     } else {
       //Si no contamos con un token, redirigimos al usuario a inicio.
       navigate("/");
@@ -152,7 +151,7 @@ export const Profile = () => {
     setIsEnabled(true);
   };
 
-
+  
   const profileChange = () => {
     return (
       profile.name !== originalProfile.name ||
@@ -233,7 +232,7 @@ export const Profile = () => {
       </div>
       <div>
       <CustomInput
-        disabled={workerEnabled}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"formation"}
@@ -241,12 +240,12 @@ export const Profile = () => {
         value={infWorker.formation}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}
-        display={rdxToken.role === 'admin'}
+        
       />
         <div>{infWorkerError.formation}</div>
 
         <CustomInput
-        disabled={workerEnabled}
+        disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
         name={"experience"}
@@ -254,7 +253,6 @@ export const Profile = () => {
         value={infWorker.experience}
         functionProp={functionHandlerWorker}
         functionBlur={errorCheckWorker}
-        display={rdxToken.role === 'admin'}
       />
         <div>{infWorkerError.experience}</div>
       
