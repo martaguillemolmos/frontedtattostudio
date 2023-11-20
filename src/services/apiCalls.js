@@ -61,6 +61,16 @@ export const getAppointmentsByUserId = async (token) => {
     });
 }
 
+// //Usuario, modificar la fecha.
+// export const updateAppointmentUser = async (token) => {
+//     // Conectamos la API a la base de datos
+//     return await axios.put (`http://localhost:4000/appointment/users`, {
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }
+//     });
+// }
+
 // Super_Admin: Appointments
 export const getAllAppointments = async (token) => {
     // Conectamos la API a la base de datos
@@ -71,11 +81,32 @@ export const getAllAppointments = async (token) => {
     });
 }
 
+//Worker: Appointments
+// export const getAppointmentsByWorkerId = async (token) => {
+//     // Conectamos la API a la base de datos
+//     return await axios.get (`http://localhost:4000/appointment`, {
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }
+//     });
+// }
+
 // Crear appointment
 export const createAppointment = async (token, body) => {
     // Conectamos la API a la base de datos
     console.log("El token en la llamada",token)
     return await axios.post('http://localhost:4000/appointment', body, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+}
+
+// Modificar Status
+export const updateAppointmentWorker = async (token, body) => {
+    // Conectamos la API a la base de datos
+    console.log("El token en la llamada",token)
+    return await axios.put('http://localhost:4000/appointment/worker', body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

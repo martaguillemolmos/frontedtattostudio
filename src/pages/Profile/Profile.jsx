@@ -104,7 +104,7 @@ export const Profile = () => {
           .catch((error) => {
             console.error(error);
           });
-          if(decoredToken.role == "super_admin"){
+          if(decoredToken.role !== "user"){
             profileWorker(token)
             .then((results) => {
               console.log(infWorker);

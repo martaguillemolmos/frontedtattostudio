@@ -53,6 +53,7 @@ export const Header = () => {
             {/* Si estás registrado pero no eres super_admin */}
             {decodificadoToken !== "super_admin" ? (
               <>
+                {/* <LinkButton path={"appointment/worker"} title={"Citas"} /> */}
                 <LinkButton path={"appointment/user"} title={"Citas"} />
               </>
             ) : (

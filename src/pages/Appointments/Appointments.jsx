@@ -13,7 +13,7 @@ import { TabBar } from "../../common/TabBar/TabBar";
 export const Appointments = () => {
   const navigate = useNavigate();
   const rdxToken = useSelector(userData);
-  
+
   const [appointments, setAppointments] = useState([]);
   const [allAppointments, setAllAppointments] = useState([])
   const [msgError, setMsgError] = useState("");
@@ -99,10 +99,7 @@ export const Appointments = () => {
       ) : (
         <div>{msgError}</div>
       )}
-      </div>
-      <div className="buttonSubmit" onClick={() => navigate("/")}>
-          Modificar cita
-        </div>    
+      </div> 
         </>
    
   );
