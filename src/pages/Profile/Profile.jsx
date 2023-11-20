@@ -20,11 +20,12 @@ import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
 
 export const Profile = () => {
+  console.log("hola")
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
   const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
-
+  console.log(rdxToken, "soy rdxtoken")
   //Instanciar Redux en escritura
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
@@ -91,20 +92,21 @@ export const Profile = () => {
 
   useEffect(() => {
     if (rdxToken !== "") {
+
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
-      console.log(decoredToken);
-      if (decoredToken.role) {
-        // Realizamos la solicitud a la API con el token almacenado en Redux
+        console.log("aqui tambien")
+        console.log("hola", decoredToken)
         profileUser(token)
           .then((results) => {
+            console.log("aquí results", results)
             setProfile(results.data.data);
             setOriginalProfile(results.data.data);
           })
           .catch((error) => {
             console.error(error);
           });
-          if(decoredToken.role !== "user"){
+          if(decoredToken.role == "admin"){
             profileWorker(token)
             .then((results) => {
               console.log(infWorker);
@@ -114,13 +116,13 @@ export const Profile = () => {
             .catch((error) => {
               console.error(error);
             });
-          }
+          
       } 
     } else {
       //Si no contamos con un token, redirigimos al usuario a inicio.
       navigate("/");
     }
-  }, [rdxToken]);
+  }, [rdxToken, navigate]);
 
   const sendData = () => {
     if (profileChange()) {
@@ -161,6 +163,7 @@ export const Profile = () => {
     );
   };
 
+  
   return (
     <div className="profileDesign">
       Información básica

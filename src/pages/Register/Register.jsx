@@ -83,7 +83,7 @@ export const Register = () => {
         
         registerUser(data)
         .then((resultado => {
-            console.log(resultado)
+            console.log("guardamos token",resultado)
              //Guardanos el token
         dispatch(login({ credentials: resultado.data}))
             setTimeout(() => {
