@@ -91,7 +91,6 @@ export const Profile = () => {
 
   useEffect(() => {
     if (rdxToken !== "") {
-
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
         console.log("aqui tambien")

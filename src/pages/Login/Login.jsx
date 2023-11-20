@@ -79,7 +79,6 @@ export const Login = () => {
           // setSnackbarOpen(false);
           //Si ya contamos con un token, redirigimos al usuario a inicio.
           navigate("/profile");
-
         } 
       }, []);
   

@@ -1,19 +1,21 @@
 import axios from "axios";
 
-//Usuuario
+
+const hostURL = "http://localhost:4000"
+//Usuario
 //Registrar
 export const registerUser = async (body) => {
-    return await axios.post (`http://localhost:4000/user`, body) 
+    return await axios.post (`/user`, body) 
 }
 
 //Login
 export const logUser = async (body) => {
-    return await axios.post (`http://localhost:4000/user/login`, body) 
+    return await axios.post (`${hostURL}/user/login`, body) 
 }
 
 // Perfil: Mostramos los datos del usuario.
 export const profileUser = (token) => {
-    return axios.get (`http://localhost:4000/user/profile`, {
+    return axios.get (`${hostURL}/user/profile`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -21,7 +23,7 @@ export const profileUser = (token) => {
 }
 // Perfil: Actualizamos los datos del usuario
 export const updateUser = (token, id, body) => {
-    return axios.put (`http://localhost:4000/user/${id}`, body, {
+    return axios.put (`${hostURL}/user/${id}`, body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -30,7 +32,7 @@ export const updateUser = (token, id, body) => {
 
 // Actualizar la contraseña 
 export const updatePassword = (token, body) => {
-    return axios.patch (`http://localhost:4000/user/password`, body, {
+    return axios.patch (`${hostURL}/user/password`, body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -39,7 +41,7 @@ export const updatePassword = (token, body) => {
 
 //Ver todos los usuarios
 export const getAllUsers = (token) => {
-    return axios.get (`http://localhost:4000/user`, {
+    return axios.get (`${hostURL}/user`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -48,13 +50,13 @@ export const getAllUsers = (token) => {
 // Productos
 export const getAllproducts = async () => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/portfolio`);
+    return await axios.get (`${hostURL}/portfolio`);
 }
 
 // Appointments
 export const getAppointmentsByUserId = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/appointment/user`, {
+    return await axios.get (`${hostURL}/appointment/user`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -64,7 +66,7 @@ export const getAppointmentsByUserId = async (token) => {
 // //Usuario, modificar la fecha.
 // export const updateAppointmentUser = async (token) => {
 //     // Conectamos la API a la base de datos
-//     return await axios.put (`http://localhost:4000/appointment/users`, {
+//     return await axios.put (`${hostURL}/appointment/users`, {
 //         headers: {
 //             'Authorization': `Bearer ${token}`
 //         }
@@ -74,7 +76,7 @@ export const getAppointmentsByUserId = async (token) => {
 // Super_Admin: Appointments
 export const getAllAppointments = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/appointment`, {
+    return await axios.get (`${hostURL}/appointment`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -84,7 +86,7 @@ export const getAllAppointments = async (token) => {
 // Worker: Appointments
 export const getAppointmentsByWorkerId = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/appointment/all`, {
+    return await axios.get (`${hostURL}/appointment/all`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -95,7 +97,7 @@ export const getAppointmentsByWorkerId = async (token) => {
 export const createAppointment = async (token, body) => {
     // Conectamos la API a la base de datos
     console.log("El token en la llamada",token)
-    return await axios.post('http://localhost:4000/appointment', body, {
+    return await axios.post(`${hostURL}/appointment`, body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -106,7 +108,7 @@ export const createAppointment = async (token, body) => {
 export const updateAppointmentWorker = async (token, body) => {
     // Conectamos la API a la base de datos
     console.log("El token en la llamada",token)
-    return await axios.put('http://localhost:4000/appointment/worker', body, {
+    return await axios.put(`${hostURL}/appointment/worker`, body, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -117,7 +119,7 @@ export const updateAppointmentWorker = async (token, body) => {
 //Recuperar la información de todos los trabajadores
 export const getAllWorkers = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/worker`, {
+    return await axios.get (`${hostURL}/worker`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -127,7 +129,7 @@ export const getAllWorkers = async (token) => {
 //Que el usuario pueda recuperar su información
 export const profileWorker = async (token) => {
     // Conectamos la API a la base de datos
-    return await axios.get (`http://localhost:4000/worker/profile`, {
+    return await axios.get (`${hostURL}/worker/profile`, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
