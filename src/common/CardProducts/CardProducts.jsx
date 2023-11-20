@@ -5,7 +5,7 @@ import { ExampleModal } from '../Modal/Modal';
 import { useSelector } from 'react-redux';
 import { userData } from '../../pages/userSlice';
 import { useEffect, useState } from 'react';
-
+import "./CardProducts.css"
 export const FeaturesCard = ({ productId, product, type, description,duration, image, price, allProducts }) => {
   const rdxToken = useSelector(userData);
   const [modalShow, setModalShow] = useState (false);

@@ -52,7 +52,7 @@ export const Workers = () => {
         })}
       </div>
     ) : (
-      <div>Esperando las películas por defecto</div>
+      <div>Esperando</div>
     )}
   </div>
 );

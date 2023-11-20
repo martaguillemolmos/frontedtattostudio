@@ -81,10 +81,10 @@ export const getAllAppointments = async (token) => {
     });
 }
 
-//Worker: Appointments
+// Worker: Appointments
 // export const getAppointmentsByWorkerId = async (token) => {
 //     // Conectamos la API a la base de datos
-//     return await axios.get (`http://localhost:4000/appointment`, {
+//     return await axios.get (`http://localhost:4000/appointment/all`, {
 //         headers: {
 //             'Authorization': `Bearer ${token}`
 //         }

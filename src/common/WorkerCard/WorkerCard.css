@@ -2,9 +2,9 @@
     position: relative;
     border-radius: 1em;
     overflow: hidden;
-    perspective: 50em;
+    perspective: 25em;
     transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-color: #000000;
+    background-color: #bdb4b4;
     width: calc(33.33% - 1em);
     margin-bottom: 1em;
     cursor: pointer;
@@ -23,8 +23,7 @@
     height: 100%;
     padding: 1.25em;
     box-sizing: border-box;
-    background-color: #000000;
-    transform: rotateX(-90deg);
+    background-color: #bdb4b4;
     transform-origin: bottom;
     transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
@@ -35,14 +34,13 @@
   
   .card-artist-title {
     margin: 0;
-    font-size: 3em;
+    font-size: 2em;
     color: #ffffff;
-    font-weight: 700;
   }
   
   .card-artist-description {
     margin: 0.6em 0 0;
-    font-size: 1;
+    font-size: 1.25em;
     color: #ffffff;
     line-height: 1.4;
   }

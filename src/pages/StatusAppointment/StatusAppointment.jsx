@@ -1,3 +1,4 @@
+import "./StatusAppointment.css"
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../userSlice";
@@ -61,7 +62,7 @@ export const StatusAppointment = () => {
 
 
     return(
-        <div className="profileDesign">
+        <div className="status">
         Modificar estado cita:
         <div>Identificador de la cita</div>
         <CustomInput

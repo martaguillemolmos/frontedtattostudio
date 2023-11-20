@@ -10,6 +10,7 @@ import { AppointmentSuperAdmin } from '../Appointments/AppointmentSuperAdmin/App
 import { Users } from '../Users/Users'
 import { Password } from '../Password/Password'
 import { StatusAppointment } from '../StatusAppointment/StatusAppointment'
+// import { AppointmentWorkers } from '../AppointmentsWorkers/AppointmentsWorkers'
 
 export const Body = () => {
     return (
@@ -25,6 +26,7 @@ export const Body = () => {
             <Route path='/product' element={<Products />}/>
             <Route path='/appointment' element={<AppointmentSuperAdmin />}/>
             <Route path='/appointment/user' element={<Appointments />}/>
+            {/* <Route path='/appointment/all' element={<AppointmentWorkers />}/> */}
             <Route path='/appointment/worker' element={<StatusAppointment />}/>
             <Route path='/password' element={<Password />}/>
             

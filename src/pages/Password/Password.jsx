@@ -89,7 +89,7 @@ export const Password = () => {
   };
 
   return (
-    <div>
+    <div className="passwordDesign">
       <CustomAlert
         title={alert.title}
         showAlert={alert.show}

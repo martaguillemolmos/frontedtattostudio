@@ -32,7 +32,6 @@ export const Products = () => {
   }, [portfolio]);
 
   return (
-    <div className="date">
       <div className="productsDesign">
         {portfolio.length > 0 ? (
           <div className="productsRoster">
@@ -57,6 +56,5 @@ export const Products = () => {
           <div>Esperando los products</div>
         )}
       </div>
-    </div>
   );
 };

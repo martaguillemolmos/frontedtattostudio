@@ -1,8 +1,37 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Fronted: Estudio Tatto
+ ---
 
-Currently, two official plugins are available:
+**Quinto proyecto del Bootcamp Full Stack Developer en GeekHubs**
+Readme en progreso.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Contenidos
+
+-  📌 [Tecnologías utilizadas](#tecnologias-utilizadas)
+-  🚀 [Inicio](#inicio)
+- 🌟 [Mejoras](#mejoras)
+- ✒️ [Contacto] (#contacto)
+- 🔗 [GitHub Pages](#github-pages-link)
+
+## 📌 Tecnologias utilizadas:
+Las tecnologías que hemos utilizado para desarrollar el proyecto son las siguientes:
+- Javascript
+- React
+- Mantine
+- Mui
+
+---
+## 🚀 Inicio:
+En este fronted contamos con 3 posibilidades y según el rol de usuario, podrá acceder a unas vistas u otras.
+
+---
+## 🌟 Mejoras
+La mejora que se tendría que realizar al proyecto es:
+1. El trabajador pueda acceder a todas sus citas.
+2. Al actualizar el nombre del usuario se actualice el token y, se modifique el nombre en el profile.
+3. Este Readme.
+Por último, realizar el diseño en css.
+---
+## ✒️ Contacto
+Puedes contactar conmigo a través de los siguientes medios:
+ - [GitHub]((https://github.com/martaguillemolmos)) - [LinkedIn](https://www.linkedin.com/in/marta-guillem-olmos-b26b9b293/)

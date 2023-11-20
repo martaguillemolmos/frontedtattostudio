@@ -1,5 +1,17 @@
 .card {
     background-color: var(--mantine-color-body);
+    --card-padding: var(--mantine-spacing-md);
+    background-color: var(--_card-bg);
+    color: var(--mantine-color-text);
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    padding: var(--card-padding);
+    position: relative;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
   }
   
   .imageSection {

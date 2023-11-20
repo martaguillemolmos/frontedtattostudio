@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../../services/apiCalls";
 import { CardExample } from "../../common/CardUsers/CardExample/CardExample";
+import "./Users.css"
 
 export const Users = () => {
   const navigate = useNavigate();
