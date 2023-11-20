@@ -54,7 +54,8 @@ export const Header = () => {
             {decodificadoToken !== "super_admin" ? (
               <>
                 {/* <LinkButton path={"appointment/worker"} title={"Citas"} /> */}
-                <LinkButton path={"appointment/user"} title={"Citas"} />
+                <LinkButton path={"appointment/user"} title={"Citas como usuario"} />
+                <LinkButton path={"appointment/all"} title={"Citas como trabajador"} />
                 <LinkButton path={"/appointment/worker"} title={"Actualizar citas"} />
 
               </>

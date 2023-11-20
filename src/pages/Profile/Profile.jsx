@@ -2,8 +2,8 @@ import "./Profile.css";
 import { useEffect, useState } from "react";
 
 // //Importamos Redux
-import { useDispatch, useSelector } from "react-redux";
-import { userData,login } from "../userSlice";
+import { useSelector } from "react-redux";
+import { userData } from "../userSlice";
 
 //Importamos las rutas
 import {
