@@ -83,9 +83,9 @@ export const Appointments = () => {
         <div className="appointmentsRoster">
           {appointments.map((appointment) => {
             return (
-
               <CardAppointments
                 key={appointment.id}
+                id={appointment.id}
                 client={appointment.client}
                 artist={`${appointment.workerAppointment.users.name} ${appointment.workerAppointment.users.surname}`}
                 portfolio={appointment.portfolio.product_id}
@@ -100,7 +100,10 @@ export const Appointments = () => {
         <div>{msgError}</div>
       )}
       </div>
-    </>
+      <div className="buttonSubmit" onClick={() => navigate("/")}>
+          Modificar cita
+        </div>    
+        </>
    
   );
 };

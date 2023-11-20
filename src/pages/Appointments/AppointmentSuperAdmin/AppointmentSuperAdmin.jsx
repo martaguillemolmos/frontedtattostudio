@@ -81,6 +81,7 @@ export const AppointmentSuperAdmin = () => {
               return (
                 <CardAppointments
                 key={results.id}
+                id={results.id}
                 client={results.client}
                 artist={results.artist}
                 portfolio={results.portfolio.product_id}

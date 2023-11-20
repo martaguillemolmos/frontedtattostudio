@@ -1,6 +1,7 @@
 import './CardAppointments.css'; // Asegúrate de tener un archivo CSS asociado
 
 const CardAppointments = ({
+  id,
   client,
   artist,
   portfolio,
@@ -30,6 +31,10 @@ const CardAppointments = ({
   return (
     <div className={`card ${getStatusColor()}`}>
         <div>
+        <div className="cardInfo">
+            <span className="infoLabel">Identificador cita:</span>
+            <span className="infoValue">{id}</span>
+          </div>
           <div className="cardInfo">
             <span className="infoLabel">Artista:</span>
             <span className="infoValue">{artist}</span>
