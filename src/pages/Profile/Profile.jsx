@@ -89,8 +89,12 @@ export const Profile = () => {
     }));
   };
 
+ 
+
   useEffect(() => {
-    if (rdxToken !== "") {
+    
+    if (rdxToken.credentials !== "") {
+      console.log("token",rdxToken)
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
         console.log("aqui tambien")
@@ -114,7 +118,7 @@ export const Profile = () => {
             .catch((error) => {
               console.error(error);
             });
-          
+          return
       } 
     } else {
       //Si no contamos con un token, redirigimos al usuario a inicio.

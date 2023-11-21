@@ -66,15 +66,18 @@
     display: flex;
     height: 30em;
     width: 25em;
-    border: 0.16em solid rgb(125, 123, 123);
-    border-radius: 0.44em;
+    
     flex-direction: column;
     align-content: center;
     justify-content: center;
     flex-wrap: nowrap;
-    background-color: whitesmoke;
     align-items: center;
+
     gap:1.2em;
+
+    background-color: whitesmoke;
+    border: 0.16em solid rgb(125, 123, 123);
+    border-radius: 0.44em;
 }
 .titleLogin{
     font-size: 2em;

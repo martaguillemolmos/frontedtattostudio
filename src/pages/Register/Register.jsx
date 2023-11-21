@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, userData } from "../userSlice";
 import { Button } from "@mui/material";
+import { InputPassword } from "../../common/PasswordField/PasswordField";
 
 export const Register = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
@@ -104,6 +105,8 @@ export const Register = () => {
     }
   };
 
+  const passwordPattern = "^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ]+$";
+
   return (
     <div className="registerDesign">
       <div className="contentRegister">
@@ -122,6 +125,7 @@ export const Register = () => {
           />
         </div>
         <div className="inputCardRegister">
+          Crear cuenta
           <CustomInput
             label={"Nombre"}
             design={"inputDesign"}
@@ -175,20 +179,26 @@ export const Register = () => {
           />
           <div>{registerDataError.emailError}</div>
 
-          <CustomInput
-            label={"Contraseña"}
-            design={"inputDesign"}
-            type={"password"}
+          <InputPassword
+            className="inputRegister"
             name={"password"}
-            placeholder={""}
-            value={""}
+            pattern={passwordPattern}
+            label={"Password"}
+            maxLength={"12"}
+            functionProp={functionHandler}
+            functionBlur={errorCheck}
+          />
+          <InputPassword
+            className="inputRegister"
+            name={"password"}
+            pattern={passwordPattern}
+            label={"Confirma tu contraseña"}
             maxLength={"12"}
             functionProp={functionHandler}
             functionBlur={errorCheck}
           />
           <div>{registerDataError.passwordError}</div>
           <Button variant="contained" className ="button" onClick={createUser} style={{ textTransform: 'none', fontFamily:'' }}>Crea tu cuenta</Button>
-            
           </div>
         </div>
       </div>
