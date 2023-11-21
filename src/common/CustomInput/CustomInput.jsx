@@ -1,8 +1,11 @@
-import "./CustomInput.css"
+import TextField from '@mui/material/TextField';
 
-export const CustomInput = ({disabled,display, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
+export const CustomInput = ({label, disabled,display, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
     return (
-        <input 
+        <div>
+        <TextField 
+        id="outlined-start-adornment"
+        label= {label}
         display={display}
         disabled={disabled}
         className={design}
@@ -17,5 +20,6 @@ export const CustomInput = ({disabled,display, design, type, pattern, name, plac
         min={min}
         max={max}
          />
+        </div>
     )
 }

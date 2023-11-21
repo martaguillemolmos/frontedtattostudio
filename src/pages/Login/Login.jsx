@@ -6,12 +6,15 @@ import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
 import { validator } from "../../services/userful";
 import CustomAlert  from "../../common/Alert/CustomAlert";
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 //Importo Redux
 
 import { useDispatch, useSelector } from "react-redux";  
 import { login, userData } from "../userSlice";
 import {SnackbarCustom} from "../../common/Snackbar/Snackbar";
+import { InputPassword } from "../../common/PasswordField/PasswordField";
 
 
 export const Login = () => {
@@ -31,7 +34,6 @@ export const Login = () => {
       setSnackbarOpen(false);
     };
 
-   
 
   const [credenciales, setCredenciales] = useState({
     email: "",
@@ -80,7 +82,7 @@ export const Login = () => {
           //Si ya contamos con un token, redirigimos al usuario a inicio.
           navigate("/profile");
         } 
-      }, []);
+      });
   
 
   //Declaramos la constante logMe para que, en caso de logearnos guarde el token y nos envíe al profile y por el contrario, nos muestre el error que nos impide hacerlo.
@@ -116,8 +118,11 @@ export const Login = () => {
         }, 500);
   };
 
+  const passwordPattern = "^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ]+$";
+
   return (
     <div className="loginDesign">
+      <div className="alertDesign">
       <CustomAlert
       title={alert.title}
       showAlert={alert.show}
@@ -128,9 +133,13 @@ export const Login = () => {
         message: ''
       })} 
       />
+      </div>
       <div className="inputCard">
-        <div>Dirección de e-mail</div>
+        <div className="titleLogin">Iniciar sesión</div>
+        <div className ="divInputs">
         <CustomInput
+          className="inputRegister"
+          label ={"Dirección de e-mail"}
           design={"inputDesign"}
           type={"email"}
           name={"email"}
@@ -141,32 +150,23 @@ export const Login = () => {
           functionBlur={errorCheck}
         />
         <div>{credencialesError.emailError}</div>
-        <div>
-          <div>Contraseña</div>
-          <div>¿Has olvidado la contraseña?</div>
-          </div>
-        <CustomInput
-          design={"inputDesign"}
-          type={"password"}
+        <InputPassword
+          className="inputRegister"
           name={"password"}
-          placeholder={""}
-          value={""}
+          pattern={passwordPattern} 
+          label={"Password"}
           maxLength={"12"}
           functionProp={functionHandler}
-          autocomplete="on"
           functionBlur={errorCheck}
         />
         <div>{credencialesError.passwordError}</div>
-
-        <div className="buttonSubmit" onClick={logMe}>
-          Iniciar sesión
         </div>
-
-        <div className="newAccount">
-          <div>----------¿Eres nuevo?----------</div>
-          <div className="buttonSubmit" onClick={registerMe}>
-          Crea tu cuenta
+        <Button variant="contained" className ="button" onClick={logMe}style={{ textTransform: 'none', fontFamily:'' }}>Iniciar sesión</Button>
+        <div className="createAccount">
+        <Divider>¿Eres nuevo?</Divider>
         </div>
+        <div>
+        <Button variant="contained" className= "button" onClick={registerMe} style={{ textTransform: 'none', fontFamily:'' }}>Crea tu cuenta</Button>
         </div>
       </div>
       { snackbarOpen ? (

@@ -106,6 +106,8 @@ export const Register = () => {
 
   return (
     <div className="registerDesign">
+    <div className="contentRegister">
+      <div className="alertDesign">
       <CustomAlert
         title={alert.title}
         showAlert={alert.show}
@@ -118,7 +120,8 @@ export const Register = () => {
           })
         }
       />
-    <div className="inputCard">
+      </div>     
+    <div className="inputCardRegister">
     <div>Nombre</div>
       <CustomInput
         design={"inputDesign"}
@@ -187,6 +190,7 @@ export const Register = () => {
       <div className="buttonSubmit" onClick={createUser}>
           Crea tu cuenta
         </div>
+    </div>
     </div>
     </div>
   );
