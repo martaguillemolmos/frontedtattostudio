@@ -1,4 +1,4 @@
-import "./Home.sass"
+import "./Home.css"
 
 export const Home = () => {
     return (
