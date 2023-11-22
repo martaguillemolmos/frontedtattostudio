@@ -37,7 +37,7 @@ export const AppointmentSuperAdmin = () => {
     };
    useEffect (() => {
     console.log("aqui entra")
-    if(rdxToken !== ""){
+    if(rdxToken.credentials !== ""){
       console.log("aqui tambien 1")
         const token = rdxToken.credentials.token;
         const decoredToken =jwtDecode(token)

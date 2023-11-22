@@ -14,7 +14,7 @@ export const Users = () => {
   const [msgError, setMsgError] = useState("");
 
   useEffect(() => {
-    if (rdxToken !== "") {
+    if (rdxToken.credentials !== "") {
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
       console.log(decoredToken);

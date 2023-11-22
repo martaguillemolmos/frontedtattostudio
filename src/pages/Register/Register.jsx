@@ -188,15 +188,7 @@ export const Register = () => {
             functionProp={functionHandler}
             functionBlur={errorCheck}
           />
-          <InputPassword
-            className="inputRegister"
-            name={"password"}
-            pattern={passwordPattern}
-            label={"Confirma tu contraseña"}
-            maxLength={"12"}
-            functionProp={functionHandler}
-            functionBlur={errorCheck}
-          />
+
           <div>{registerDataError.passwordError}</div>
           <Button variant="contained" className ="button" onClick={createUser} style={{ textTransform: 'none', fontFamily:'' }}>Crea tu cuenta</Button>
           </div>

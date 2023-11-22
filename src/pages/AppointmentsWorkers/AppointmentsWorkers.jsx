@@ -40,7 +40,7 @@ export const AppointmentsWorker = () => {
 
   //Utilizamos este useEffect para que, en el caso que alguien ya se haya logeado, no pueda acceder a esta vista.
   useEffect(() => {
-    if(rdxToken !== ""){
+    if(rdxToken.credentials !== ""){
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token)
       if (decoredToken !== "admin" && appointments.length === 0){

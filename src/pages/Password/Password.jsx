@@ -38,7 +38,7 @@ export const Password = () => {
       };
 
   useEffect(() => {
-    if (rdxToken == "") {
+    if (rdxToken.credentials == "") {
       navigate("/");
     }
   }, [rdxToken]);
