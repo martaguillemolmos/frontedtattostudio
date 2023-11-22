@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, userData } from "../userSlice";
 import { SnackbarCustom } from "../../common/Snackbar/Snackbar";
 import { InputPassword } from "../../common/PasswordField/PasswordField";
+import { SimpleContainer } from "../../common/Container/Container";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -137,55 +138,59 @@ export const Login = () => {
           }
         />
       </div>
-      <div className="inputCard">
-        <div className="titleLogin">Iniciar sesión</div>
-        <div className="divInputs">
-          <CustomInput
-            className="inputRegister"
-            label={"Dirección de e-mail"}
-            design={"inputDesign"}
-            type={"email"}
-            name={"email"}
-            placeholder={""}
-            value={""}
-            maxLength={"50"}
-            functionProp={functionHandler}
-            functionBlur={errorCheck}
-          />
-          <div>{credencialesError.emailError}</div>
-          <InputPassword
-            className="inputRegister"
-            name={"password"}
-            pattern={passwordPattern}
-            label={"Password"}
-            maxLength={"12"}
-            functionProp={functionHandler}
-            functionBlur={errorCheck}
-          />
-          <div>{credencialesError.passwordError}</div>
-        </div>
-        <Button
-          variant="contained"
-          className="button"
-          onClick={logMe}
-          style={{ textTransform: "none", fontFamily: "" }}
-        >
-          Iniciar sesión
-        </Button>
-        <div className="createAccount">
-          <Divider>¿Eres nuevo?</Divider>
-        </div>
-        <div>
-          <Button
-            variant="contained"
-            className="button"
-            onClick={registerMe}
-            style={{ textTransform: "none", fontFamily: "" }}
-          >
-            Crea tu cuenta
-          </Button>
-        </div>
-      </div>
+      <SimpleContainer>
+        {
+          <div className="contentInput">
+            <div className="titleLogin">Iniciar sesión</div>
+            <div className="divInputs">
+              <CustomInput
+                className="inputRegister"
+                label={"Dirección de e-mail"}
+                design={"inputDesign"}
+                type={"email"}
+                name={"email"}
+                placeholder={""}
+                value={""}
+                maxLength={"50"}
+                functionProp={functionHandler}
+                functionBlur={errorCheck}
+              />
+              <div>{credencialesError.emailError}</div>
+              <InputPassword
+                className="inputRegister"
+                name={"password"}
+                pattern={passwordPattern}
+                label={"Password"}
+                maxLength={"12"}
+                functionProp={functionHandler}
+                functionBlur={errorCheck}
+              />
+              <div>{credencialesError.passwordError}</div>
+            </div>
+            <Button
+              variant="contained"
+              className="button"
+              onClick={logMe}
+              style={{ textTransform: "none", fontFamily: "" }}
+            >
+              Iniciar sesión
+            </Button>
+            <div className="createAccount">
+              <Divider>¿Eres nuevo?</Divider>
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                className="button"
+                onClick={registerMe}
+                style={{ textTransform: "none", fontFamily: "" }}
+              >
+                Crea tu cuenta
+              </Button>
+            </div>
+          </div>
+        }
+      </SimpleContainer>
       {snackbarOpen ? (
         <SnackbarCustom
           open={snackbarOpen}

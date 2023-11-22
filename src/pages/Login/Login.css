@@ -11,24 +11,6 @@
     font-family: 'General Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-@media only screen and (max-width: 990px) {
-    html {
-      font-size: 0.7em;
-    }
-  }
-  
-  @media only screen and (max-width: 750px) {
-    html {
-      font-size: 0.5em;
-    }
-  }
-  
-  @media only screen and (max-width: 680px) {
-    html {
-      font-size: 0.33em;
-    }
-  }
-
 .loginDesign {
 
     height: 90vh;
@@ -44,7 +26,9 @@
     gap: 1em;
 }
 
-.divInputs{
+
+
+.contentInput{
     display: flex;
     gap: 0.4em;
     flex-direction: column;
