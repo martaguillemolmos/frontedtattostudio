@@ -144,6 +144,7 @@ export const Login = () => {
             <div className="titleLogin">Iniciar sesión</div>
             <div className="divInputs">
               <CustomInput
+                required
                 className="inputRegister"
                 label={"Dirección de e-mail"}
                 design={"inputDesign"}
@@ -157,6 +158,7 @@ export const Login = () => {
               />
               <div>{credencialesError.emailError}</div>
               <InputPassword
+                required
                 className="inputRegister"
                 name={"password"}
                 pattern={passwordPattern}
