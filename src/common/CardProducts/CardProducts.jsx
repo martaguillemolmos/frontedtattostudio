@@ -35,7 +35,7 @@ export const FeaturesCard = ({ productId, product, type, description,duration, i
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src={image} alt="Producto" />
+        <Image src={image} alt="Producto" width="100" height="250" />
       </Card.Section>
 
       <Group justify="space-between" mt="md">

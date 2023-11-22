@@ -124,23 +124,31 @@ export const Login = () => {
 
   return (
     <div className="loginDesign">
-      <div className="alertDesign">
-        <CustomAlert
-          title={alert.title}
-          showAlert={alert.show}
-          message={alert.message}
-          onClose={() =>
-            alertHandler({
-              show: false,
-              title: "",
-              message: "",
-            })
-          }
+      <div className="headerLogin">
+        <img
+          src="https://www.familyarttattoo.com/wp-content/uploads/2023/03/FAMILY_ART_new_logo.png"
+          alt="Family Art Logo"
+          style={{ height: "15em", width: "15em" }}
         />
       </div>
-      <SimpleContainer>
+
+      <SimpleContainer className="containerDesign">
         {
           <div className="contentInput">
+            <div className="alertDesign">
+              <CustomAlert
+                title={alert.title}
+                showAlert={alert.show}
+                message={alert.message}
+                onClose={() =>
+                  alertHandler({
+                    show: false,
+                    title: "",
+                    message: "",
+                  })
+                }
+              />
+            </div>
             <div className="titleLogin">Iniciar sesión</div>
             <div className="divInputs">
               <CustomInput

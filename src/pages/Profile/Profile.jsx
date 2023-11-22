@@ -18,12 +18,16 @@ import { validator } from "../../services/userful";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
+import { LetterAvatars } from "../../common/Avatar/Avatar";
 
 export const Profile = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
   const navigate = useNavigate();
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
+
+  const inicial = rdxToken.credentials.name ? rdxToken.credentials.name.charAt(0) : '';
+
 
   //Instanciar Redux en escritura
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
@@ -54,7 +58,7 @@ export const Profile = () => {
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
- 
+
   const [originalProfile, setOriginalProfile] = useState(false);
 
   const functionHandler = (e) => {
@@ -89,37 +93,35 @@ export const Profile = () => {
     }));
   };
 
- 
-
   useEffect(() => {
-    
     if (rdxToken.credentials !== "") {
-      console.log("token",rdxToken)
+      console.log("token", rdxToken);
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
-        console.log("aqui tambien")
-        console.log("hola", decoredToken)
-        profileUser(token)
+      console.log("aqui tambien");
+      console.log("hola", decoredToken);
+  
+      profileUser(token)
+        .then((results) => {
+          console.log("aquí results", results);
+          setProfile(results.data.data);
+          setOriginalProfile(results.data.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      if (decoredToken.role == "admin") {
+        profileWorker(token)
           .then((results) => {
-            console.log("aquí results", results)
-            setProfile(results.data.data);
-            setOriginalProfile(results.data.data);
+            console.log(infWorker);
+            setInfWorker(results.data);
+            console.log("este es el data del worker", results.data);
           })
           .catch((error) => {
             console.error(error);
           });
-          if(decoredToken.role == "admin"){
-            profileWorker(token)
-            .then((results) => {
-              console.log(infWorker);
-              setInfWorker(results.data);
-              console.log("este es el data del worker", results.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-          return
-      } 
+        return;
+      }
     } else {
       //Si no contamos con un token, redirigimos al usuario a inicio.
       navigate("/");
@@ -132,7 +134,6 @@ export const Profile = () => {
 
       updateUser(rdxToken.credentials.token, userId, profile)
         .then(() => {
-          
           console.log(
             `Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`
           );
@@ -155,7 +156,6 @@ export const Profile = () => {
     setIsEnabled(true);
   };
 
-  
   const profileChange = () => {
     return (
       profile.name !== originalProfile.name ||
@@ -165,12 +165,23 @@ export const Profile = () => {
     );
   };
 
-  
   return (
     <div className="profileDesign">
+      <div className="cabecera">
+      <div className="avatar">
+      <LetterAvatars initial={inicial} />
+      </div>
+      <div className="infoCabecera">
+      <p className="p">Perfil</p>
+      <h2>{profile.name} {profile.surname}</h2>
+
+      </div>
+      
+      </div>
+      <div className="contentProfile">
       Información básica
-      <div>Nombre</div>
       <CustomInput
+        label={"Nombre"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
@@ -182,8 +193,8 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.nameError}</div>
-      <div>Apellidos</div>
       <CustomInput
+        label={"Apellidos"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
@@ -196,8 +207,8 @@ export const Profile = () => {
       />
       <div>{profileError.surnameError}</div>
       Información de contacto
-      <div>Teléfono</div>
       <CustomInput
+        label={"Teléfono"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"tel"}
@@ -210,8 +221,8 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.phoneError}</div>
-      <div>Dirección de e-mail</div>
       <CustomInput
+        label={"Dirección de e-mail"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"email"}
@@ -223,6 +234,7 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.emailError}</div>
+      </div>
       {isEnabled ? (
         <div className="editDesign" onClick={() => setIsEnabled(!isEnabled)}>
           Edita tus datos
@@ -239,33 +251,31 @@ export const Profile = () => {
         </div>
       </div>
       <div>
-      <CustomInput
-        disabled={isEnabled}
-        design={"inputDesign"}
-        type={"text"}
-        name={"formation"}
-        placeholder={""}
-        maxLength={"200"}
-        value={infWorker.formation}
-        functionProp={functionHandlerWorker}
-        functionBlur={errorCheckWorker}
-        
-      />
+        <CustomInput
+          disabled={isEnabled}
+          design={"inputDesign"}
+          type={"text"}
+          name={"formation"}
+          placeholder={""}
+          maxLength={"200"}
+          value={infWorker.formation}
+          functionProp={functionHandlerWorker}
+          functionBlur={errorCheckWorker}
+        />
         <div>{infWorkerError.formation}</div>
 
         <CustomInput
-        disabled={isEnabled}
-        design={"inputDesign"}
-        type={"text"}
-        name={"experience"}
-        placeholder={""}
-        maxLength={"200"}
-        value={infWorker.experience}
-        functionProp={functionHandlerWorker}
-        functionBlur={errorCheckWorker}
-      />
+          disabled={isEnabled}
+          design={"inputDesign"}
+          type={"text"}
+          name={"experience"}
+          placeholder={""}
+          maxLength={"200"}
+          value={infWorker.experience}
+          functionProp={functionHandlerWorker}
+          functionBlur={errorCheckWorker}
+        />
         <div>{infWorkerError.experience}</div>
-      
       </div>
     </div>
   );

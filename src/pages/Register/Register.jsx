@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, userData } from "../userSlice";
 import { Button } from "@mui/material";
 import { InputPassword } from "../../common/PasswordField/PasswordField";
+import { SimpleContainer } from "../../common/Container/Container";
 
 export const Register = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
@@ -124,9 +125,13 @@ export const Register = () => {
             }
           />
         </div>
+        <SimpleContainer>
+        {
         <div className="inputCardRegister">
-          Crear cuenta
+          <div className="titleRegister">Crear cuenta</div>
+          <div className="divInputs">
           <CustomInput
+            required
             label={"Nombre"}
             design={"inputDesign"}
             type={"text"}
@@ -140,6 +145,7 @@ export const Register = () => {
           <div>{registerDataError.nameError}</div>
 
           <CustomInput
+            requiered
             label={"Apellidos"}          
             design={"inputDesign"}
             type={"text"}
@@ -153,6 +159,7 @@ export const Register = () => {
           <div>{registerDataError.surnameError}</div>
 
           <CustomInput
+          required
             label={"Teléfono"}
             design={"inputDesign"}
             type={"tel"}
@@ -167,6 +174,7 @@ export const Register = () => {
           <div>{registerDataError.phoneError}</div>
 
           <CustomInput
+          required
             label={"Dirección de e-mail"}
             design={"inputDesign"}
             type={"email"}
@@ -192,6 +200,9 @@ export const Register = () => {
           <div>{registerDataError.passwordError}</div>
           <Button variant="contained" className ="button" onClick={createUser} style={{ textTransform: 'none', fontFamily:'' }}>Crea tu cuenta</Button>
           </div>
+          </div>
+             }
+             </SimpleContainer>
         </div>
       </div>
   );

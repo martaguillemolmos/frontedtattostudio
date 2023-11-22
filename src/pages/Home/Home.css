@@ -10,3 +10,12 @@
 
     background-color: beige;
 }
+
+  
+  .logoFamily {
+    transition: transform 0.3s ease;
+  }
+  
+  .imgLogo:hover .logoFamily {
+    transform: scale(1.1); 
+  }
