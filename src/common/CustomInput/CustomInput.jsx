@@ -20,7 +20,17 @@ export const CustomInput = ({required, label, disabled,display, design, type, pa
         pattern={pattern}        
         min={min}
         max={max}
-        sx={{'&.outlined-size-normal': {}}}
+        sx={{
+            '& .MuiInputLabel-root': {
+                // Agrega tus estilos adicionales aquí
+                display: 'flex',
+                // ...otros estilos
+              },
+              '&.outlined-size-normal': {
+                // Estilos específicos para el caso 'outlined-size-normal'
+                // Puedes agregar estilos adicionales aquí
+              },
+        }}
          />
         </div>
     )

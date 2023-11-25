@@ -72,7 +72,7 @@ export const AppointmentSuperAdmin = () => {
    }, [rdxToken, navigate])
 
     return (
-      <>
+      <div className="allAppointments">
       <TabBar tabs={customTabs} value={tabValue} handler={handlerTab} />
        <div className="appointmentsDesign">
       {appointments.length > 0 ? (
@@ -97,7 +97,7 @@ export const AppointmentSuperAdmin = () => {
       <div>{msgError}</div>
     )}
       </div>
-      </>
+      </div>
       
   );
 };

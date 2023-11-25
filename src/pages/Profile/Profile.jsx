@@ -18,6 +18,7 @@ import { validator } from "../../services/userful";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
+import { Button } from "@mui/material";
 import { LetterAvatars } from "../../common/Avatar/Avatar";
 
 export const Profile = () => {
@@ -28,8 +29,6 @@ export const Profile = () => {
 
   const inicial = rdxToken.credentials.name ? rdxToken.credentials.name.charAt(0) : '';
 
-
-  //Instanciar Redux en escritura
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
     name: "",
@@ -93,6 +92,8 @@ export const Profile = () => {
     }));
   };
 
+  
+
   useEffect(() => {
     if (rdxToken.credentials !== "") {
       console.log("token", rdxToken);
@@ -111,9 +112,11 @@ export const Profile = () => {
           console.error(error);
         });
       if (decoredToken.role == "admin") {
+        console.log("eres admin")
         profileWorker(token)
           .then((results) => {
             console.log(infWorker);
+            console.log("wokr", results)
             setInfWorker(results.data);
             console.log("este es el data del worker", results.data);
           })
@@ -167,7 +170,8 @@ export const Profile = () => {
 
   return (
     <div className="profileDesign">
-      <div className="cabecera">
+      <div className="contentProfile">
+       <div className="cabecera">
       <div className="avatar">
       <LetterAvatars initial={inicial} />
       </div>
@@ -178,11 +182,12 @@ export const Profile = () => {
       </div>
       
       </div>
-      <div className="contentProfile">
+      <div className="inforProfile">
+      <div className="inforUser">
       Información básica
       <CustomInput
-        label={"Nombre"}
         disabled={isEnabled}
+        display ={"flex"}
         design={"inputDesign"}
         type={"text"}
         name={"name"}
@@ -194,7 +199,6 @@ export const Profile = () => {
       />
       <div>{profileError.nameError}</div>
       <CustomInput
-        label={"Apellidos"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"text"}
@@ -206,9 +210,10 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.surnameError}</div>
+      </div> 
+      <div className="inforUser">
       Información de contacto
       <CustomInput
-        label={"Teléfono"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"tel"}
@@ -222,7 +227,6 @@ export const Profile = () => {
       />
       <div>{profileError.phoneError}</div>
       <CustomInput
-        label={"Dirección de e-mail"}
         disabled={isEnabled}
         design={"inputDesign"}
         type={"email"}
@@ -235,24 +239,41 @@ export const Profile = () => {
       />
       <div>{profileError.emailError}</div>
       </div>
+      </div>
+      </div>
       {isEnabled ? (
-        <div className="editDesign" onClick={() => setIsEnabled(!isEnabled)}>
-          Edita tus datos
-        </div>
+        <Button
+         variant="contained"
+         className="button"
+         onClick={() => setIsEnabled(!isEnabled)}
+         style={{ textTransform: "none", fontFamily: "" }}
+       >
+         Edita tus datos
+       </Button>
+  
       ) : (
-        <div className="sendDesign" onClick={() => sendData()}>
-          Enviar cambios
-        </div>
+        <Button
+         variant="contained"
+         className="button"
+         onClick={() => sendData()}
+         style={{ textTransform: "none", fontFamily: "" }}
+       >
+         Enviar cambios
+       </Button>
+      
       )}
       <div>
-        <div>
+        <div className="password">
           Contraseña
-          <LinkButton path={"/password"} title={"Ir password"} />
+          <LinkButton path={"/password"} title={"Modificar contraseña"} />
         </div>
       </div>
-      <div>
+
+ 
+      <div className="inforWorker">
+       Datos del trabajador
         <CustomInput
-          disabled={isEnabled}
+          disabled={true}
           design={"inputDesign"}
           type={"text"}
           name={"formation"}
@@ -265,7 +286,7 @@ export const Profile = () => {
         <div>{infWorkerError.formation}</div>
 
         <CustomInput
-          disabled={isEnabled}
+          disabled={true}
           design={"inputDesign"}
           type={"text"}
           name={"experience"}
@@ -275,8 +296,9 @@ export const Profile = () => {
           functionProp={functionHandlerWorker}
           functionBlur={errorCheckWorker}
         />
+      
         <div>{infWorkerError.experience}</div>
-      </div>
+        </div>
     </div>
   );
 };
