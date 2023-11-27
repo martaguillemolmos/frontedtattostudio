@@ -8,7 +8,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
 import { FormControl } from '@mui/material';
 
-export const InputPassword = ({ name, label, pattern, maxLength, functionProp, functionBlur}) => {
+export const InputPassword = ({ name, required, label, pattern, maxLength, functionProp, functionBlur}) => {
     const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -21,6 +21,7 @@ export const InputPassword = ({ name, label, pattern, maxLength, functionProp, f
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
         <OutlinedInput 
+        required={required}
         id="outlined-adornment-password"
         name ={name}
         type={showPassword ? 'text' : 'password'}

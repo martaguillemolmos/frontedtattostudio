@@ -37,7 +37,7 @@ export const AppointmentSuperAdmin = () => {
     };
    useEffect (() => {
     console.log("aqui entra")
-    if(rdxToken !== ""){
+    if(rdxToken.credentials !== ""){
       console.log("aqui tambien 1")
         const token = rdxToken.credentials.token;
         const decoredToken =jwtDecode(token)
@@ -72,7 +72,7 @@ export const AppointmentSuperAdmin = () => {
    }, [rdxToken, navigate])
 
     return (
-      <>
+      <div className="allAppointments">
       <TabBar tabs={customTabs} value={tabValue} handler={handlerTab} />
        <div className="appointmentsDesign">
       {appointments.length > 0 ? (
@@ -97,7 +97,7 @@ export const AppointmentSuperAdmin = () => {
       <div>{msgError}</div>
     )}
       </div>
-      </>
+      </div>
       
   );
 };

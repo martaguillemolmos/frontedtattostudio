@@ -1,49 +1,94 @@
-.card-artist {
-    position: relative;
-    border-radius: 1em;
-    overflow: hidden;
-    perspective: 50em;
-    transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-color: #a79c9c;
-    width: calc(33.33% - 1em);
-    margin-bottom: 1em;
-    cursor: pointer;
+@media (min-width: 1200px) {
+  .usersRoster {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
-  
-  .card-artist:hover {
-    transform: scale(1.05);
-    filter: grayscale(0%);
+
+  .card-user {
+    width: 50%;
   }
-  
-  .card-artist-content {
-    position: absolute;
-    top: 0;
-    left: 0;
+}
+
+/* Pantallas medianas */
+@media (max-width: 1199px) {
+  .usersRoster {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .card-user {
+    width: 50%;
+  }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+  .usersRoster {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .card-user {
     width: 100%;
-    height: 100%;
-    padding: 1.25em;
-    box-sizing: border-box;
-    background-color: #000000;
-    transform: rotateX(-90deg);
-    transform-origin: bottom;
-    transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  
-  .card-artist:hover .card-artist-content {
-    transform: rotateX(-9deg);
-  }
-  
-  .card-artist-title {
-    margin: 0;
-    font-size: 3em;
-    color: #ffffff;
-    font-weight: 700;
-  }
-  
-  .card-artist-description {
-    margin: 0.6em 0 0;
-    font-size: 1;
-    color: #ffffff;
-    line-height: 1.4;
-  }
-  
+}
+
+.card-user {
+  display: flex;
+  width: 20em;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  background-color: #e1d8d8; 
+  margin-bottom: 1em;
+  cursor: pointer;
+  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.card-user:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.card-user-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em 1em; 
+  background-color: #a79c9c;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+  width: 100%; 
+}
+
+.role-box {
+  background-color: #4caf50;
+  padding: 0.2em 0.5em;
+  border-radius: 0.5em;
+  height: 2.2em;
+  width: 7em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+
+}
+
+.card-content {
+  padding: 0.7em;
+  background-color: #bdb4b4;
+}
+

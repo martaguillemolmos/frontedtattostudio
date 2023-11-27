@@ -5,7 +5,7 @@ const hostURL = "http://localhost:4000"
 //Usuario
 //Registrar
 export const registerUser = async (body) => {
-    return await axios.post (`/user`, body) 
+    return await axios.post (`${hostURL}/user`, body) 
 }
 
 //Login

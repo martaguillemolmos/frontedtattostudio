@@ -8,12 +8,10 @@
     justify-content: center;
     align-items: center;
 
-    background-color: beige;
-}
+    background-color: whitesmoke;}
 
 .deleteAccount{
     height: 2em;
-
    cursor: pointer;
 }
 
@@ -21,3 +19,96 @@
     background-color: red;
 }
 
+.cabecera{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.infoCabecera{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.p{
+    margin-bottom: -1.2em;
+}
+
+.profileDesign{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 1.8em;
+}
+
+.MuiContainer-root {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-content: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+ .contentProfile{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6em;
+ }
+
+ .inforUser{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6em;
+ }
+
+ .inforWorker{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6em;
+ }
+
+ .password{
+    display: flex;
+    gap: 1.2em;
+    margin-top: 1em;
+ }
+
+ .passwordContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2em;
+ }
+
+.passwordButton{
+    color: blueviolet;
+}
+
+.passwordButton:hover{
+cursor: pointer;
+color: brown;
+}

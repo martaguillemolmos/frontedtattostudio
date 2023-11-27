@@ -1,3 +1,4 @@
+import "./Password.css"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout, userData } from "../userSlice";
@@ -6,15 +7,14 @@ import { updatePassword } from "../../services/apiCalls";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { validator } from "../../services/userful";
 import CustomAlert from "../../common/Alert/CustomAlert";
+import { InputPassword } from "../../common/PasswordField/PasswordField";
+import { Button } from "@material-ui/core";
 
 export const Password = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const rdxToken = useSelector(userData);
-
-
 
   const [newPassword, setNewPassword] = useState({
     passwordOld: "",
@@ -25,20 +25,22 @@ export const Password = () => {
     password: "",
   });
 
-    //Declaramos los atributos del objeto que controla la alerta.
-    const [alert, setAlert] = useState({
-        show: false,
-        title: "",
-        message: "",
-      });
-    
-      //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
-      const alertHandler = (e) => {
-        setAlert(e);
-      };
+  const passwordPattern = "^[a-zA-Z0-9áéíóúüñÁÉÍÓÚÜÑ]+$";
+
+  //Declaramos los atributos del objeto que controla la alerta.
+  const [alert, setAlert] = useState({
+    show: false,
+    title: "",
+    message: "",
+  });
+
+  //Declaramos la función alert, para que pueda mutar su estado dependiendo del evento.
+  const alertHandler = (e) => {
+    setAlert(e);
+  };
 
   useEffect(() => {
-    if (rdxToken == "") {
+    if (rdxToken.credentials == "") {
       navigate("/");
     }
   }, [rdxToken]);
@@ -69,21 +71,20 @@ export const Password = () => {
       console.log(token);
       updatePassword(token, newPassword)
         .then(() => {
-            //Añadir control Snackbar
-              dispatch(logout({ credentials: "" }));
-              navigate("/");
-          }
-        )
+          //Añadir control Snackbar
+          dispatch(logout({ credentials: "" }));
+          navigate("/");
+        })
         .catch((error) => {
-            if (error.response.status !== 200) {
-              console.log(error.response);
-              alertHandler({
-                show: true,
-                title: `Error ${error.response.status}`,
-                message: `${error.response.data}`,
-              });
-           }
-          });
+          if (error.response.status !== 200) {
+            console.log(error.response);
+            alertHandler({
+              show: true,
+              title: `Error ${error.response.status}`,
+              message: `${error.response.data}`,
+            });
+          }
+        });
     }
     console.log(newPassword);
   };
@@ -102,8 +103,9 @@ export const Password = () => {
           })
         }
       />
-      Contraseña actual
+      Modifica tu contraseña
       <CustomInput
+        label={"Contraseña actual"}
         design={"inputDesign"}
         type={"password"}
         name={"passwordOld"}
@@ -114,21 +116,29 @@ export const Password = () => {
         functionBlur={errorCheck}
       />
       <div>{newPasswordError.passwordOld}</div>
-      Nueva contraseña
-      <CustomInput
-        design={"inputDesign"}
-        type={"text"}
+      <div className="newPassword">
+      Introduce nueva contraseña
+      <InputPassword
+        required
+        className="inputRegister"
         name={"password"}
-        placeholder={""}
-        value={""}
+        pattern={passwordPattern}
+        label={"Nueva contraseña"}
         maxLength={"12"}
         functionProp={functionHandler}
         functionBlur={errorCheck}
       />
       <div>{newPasswordError.password}</div>
-      <div className="linkButtonDesign" onClick={Update}>
-        Cambiar contraseña
       </div>
+      <Button
+              variant="contained"
+              className="button"
+              onClick={Update}
+              style={{ textTransform: "none", fontFamily: "" }}
+            >
+              Cambiar contraseña
+            </Button>
+    
     </div>
   );
 };

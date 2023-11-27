@@ -1,9 +1,10 @@
 import TextField from '@mui/material/TextField';
 
-export const CustomInput = ({label, disabled,display, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
+export const CustomInput = ({required, label, disabled,display, design, type, pattern, name, placeholder, value, maxLength, functionProp, functionBlur, min, max}) => {
     return (
-        <div>
+        <div className='customInputDesing'>
         <TextField 
+        required={required}
         id="outlined-start-adornment"
         label= {label}
         display={display}
@@ -19,6 +20,17 @@ export const CustomInput = ({label, disabled,display, design, type, pattern, nam
         pattern={pattern}        
         min={min}
         max={max}
+        sx={{
+            '& .MuiInputLabel-root': {
+                // Agrega tus estilos adicionales aquí
+                display: 'flex',
+                // ...otros estilos
+              },
+              '&.outlined-size-normal': {
+                // Estilos específicos para el caso 'outlined-size-normal'
+                // Puedes agregar estilos adicionales aquí
+              },
+        }}
          />
         </div>
     )

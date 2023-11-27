@@ -29,21 +29,24 @@ const CardAppointments = ({
     return null;
   }
   return (
-    <div className={`card ${getStatusColor()}`}>
-        <div>
-        <div className="cardInfo">
+    <div className={`card${getStatusColor()}`}>
+        <div className='allInfo'>
+        <div className="idAppointment">
+          <div className='idCard'>
             <span className="infoLabel">Identificador cita:</span>
             <span className="infoValue">{id}</span>
-          </div>
-          <div className="cardInfo">
+            </div>
+          <div className="artistCard">
             <span className="infoLabel">Artista:</span>
             <span className="infoValue">{artist}</span>
           </div>
-          <div className="cardInfo">
+          </div>
+          
+          <div className="productCard">
             <span className="infoLabel">Producto:</span>
             <span className="infoValue">{portfolio}</span>
           </div>
-        </div>
+     
     
         <div>
           <div className="cardInfo">
@@ -59,6 +62,7 @@ const CardAppointments = ({
       <div className="cardInfo">
         <span className="infoLabel">Estatus:</span>
         <span className="infoValue">{status_appointment}</span>
+      </div>
       </div>
     </div>
   );

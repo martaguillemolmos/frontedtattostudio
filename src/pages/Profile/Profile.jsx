@@ -18,6 +18,8 @@ import { validator } from "../../services/userful";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { LinkButton } from "../../common/LinkButton/LinkButton";
+import { Button } from "@mui/material";
+import { LetterAvatars } from "../../common/Avatar/Avatar";
 
 export const Profile = () => {
   //Declaramos esta constante para que nos permita dirigirnos desde esta vista a otras.
@@ -25,7 +27,8 @@ export const Profile = () => {
   // Instanciamos Redux en lectura
   const rdxToken = useSelector(userData);
 
-  //Instanciar Redux en escritura
+  const inicial = rdxToken.credentials.name ? rdxToken.credentials.name.charAt(0) : '';
+
   // Creamos un Hook con las propiedades que queremos mostrar en pantalla del perfil
   const [profile, setProfile] = useState({
     name: "",
@@ -54,7 +57,7 @@ export const Profile = () => {
   });
 
   const [isEnabled, setIsEnabled] = useState(true);
- 
+
   const [originalProfile, setOriginalProfile] = useState(false);
 
   const functionHandler = (e) => {
@@ -89,33 +92,39 @@ export const Profile = () => {
     }));
   };
 
+  
+
   useEffect(() => {
-    if (rdxToken !== "") {
+    if (rdxToken.credentials !== "") {
+      console.log("token", rdxToken);
       const token = rdxToken.credentials.token;
       const decoredToken = jwtDecode(token);
-        console.log("aqui tambien")
-        console.log("hola", decoredToken)
-        profileUser(token)
+      console.log("aqui tambien");
+      console.log("hola", decoredToken);
+  
+      profileUser(token)
+        .then((results) => {
+          console.log("aquí results", results);
+          setProfile(results.data.data);
+          setOriginalProfile(results.data.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      if (decoredToken.role == "admin") {
+        console.log("eres admin")
+        profileWorker(token)
           .then((results) => {
-            console.log("aquí results", results)
-            setProfile(results.data.data);
-            setOriginalProfile(results.data.data);
+            console.log(infWorker);
+            console.log("wokr", results)
+            setInfWorker(results.data);
+            console.log("este es el data del worker", results.data);
           })
           .catch((error) => {
             console.error(error);
           });
-          if(decoredToken.role == "admin"){
-            profileWorker(token)
-            .then((results) => {
-              console.log(infWorker);
-              setInfWorker(results.data);
-              console.log("este es el data del worker", results.data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-          
-      } 
+        return;
+      }
     } else {
       //Si no contamos con un token, redirigimos al usuario a inicio.
       navigate("/");
@@ -128,7 +137,6 @@ export const Profile = () => {
 
       updateUser(rdxToken.credentials.token, userId, profile)
         .then(() => {
-          
           console.log(
             `Enhorabuena, ${profile.name}, los cambios se han realizado con éxito.`
           );
@@ -151,7 +159,6 @@ export const Profile = () => {
     setIsEnabled(true);
   };
 
-  
   const profileChange = () => {
     return (
       profile.name !== originalProfile.name ||
@@ -161,13 +168,26 @@ export const Profile = () => {
     );
   };
 
-  
   return (
     <div className="profileDesign">
+      <div className="contentProfile">
+       <div className="cabecera">
+      <div className="avatar">
+      <LetterAvatars initial={inicial} />
+      </div>
+      <div className="infoCabecera">
+      <p className="p">Perfil</p>
+      <h2>{profile.name} {profile.surname}</h2>
+
+      </div>
+      
+      </div>
+      <div className="inforProfile">
+      <div className="inforUser">
       Información básica
-      <div>Nombre</div>
       <CustomInput
         disabled={isEnabled}
+        display ={"flex"}
         design={"inputDesign"}
         type={"text"}
         name={"name"}
@@ -178,7 +198,6 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.nameError}</div>
-      <div>Apellidos</div>
       <CustomInput
         disabled={isEnabled}
         design={"inputDesign"}
@@ -191,8 +210,9 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.surnameError}</div>
+      </div> 
+      <div className="inforUser">
       Información de contacto
-      <div>Teléfono</div>
       <CustomInput
         disabled={isEnabled}
         design={"inputDesign"}
@@ -206,7 +226,6 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.phoneError}</div>
-      <div>Dirección de e-mail</div>
       <CustomInput
         disabled={isEnabled}
         design={"inputDesign"}
@@ -219,50 +238,67 @@ export const Profile = () => {
         functionBlur={errorCheck}
       />
       <div>{profileError.emailError}</div>
+      </div>
+      </div>
+      </div>
       {isEnabled ? (
-        <div className="editDesign" onClick={() => setIsEnabled(!isEnabled)}>
-          Edita tus datos
-        </div>
+        <Button
+         variant="contained"
+         className="button"
+         onClick={() => setIsEnabled(!isEnabled)}
+         style={{ textTransform: "none", fontFamily: "" }}
+       >
+         Edita tus datos
+       </Button>
+  
       ) : (
-        <div className="sendDesign" onClick={() => sendData()}>
-          Enviar cambios
-        </div>
+        <Button
+         variant="contained"
+         className="button"
+         onClick={() => sendData()}
+         style={{ textTransform: "none", fontFamily: "" }}
+       >
+         Enviar cambios
+       </Button>
+      
       )}
-      <div>
-        <div>
-          Contraseña
-          <LinkButton path={"/password"} title={"Ir password"} />
+      <div className="passwordContent">
+        Contraseña
+        <div className="passwordButton" onClick={() => navigate("/password")}>
+          Modificar contraseña
         </div>
       </div>
-      <div>
-      <CustomInput
-        disabled={isEnabled}
-        design={"inputDesign"}
-        type={"text"}
-        name={"formation"}
-        placeholder={""}
-        maxLength={"200"}
-        value={infWorker.formation}
-        functionProp={functionHandlerWorker}
-        functionBlur={errorCheckWorker}
-        
-      />
+
+ 
+      <div className="inforWorker">
+       Datos del trabajador
+        <CustomInput
+          disabled={true}
+          design={"inputDesign"}
+          type={"text"}
+          name={"formation"}
+          placeholder={""}
+          maxLength={"200"}
+          value={infWorker.formation}
+          functionProp={functionHandlerWorker}
+          functionBlur={errorCheckWorker}
+        />
         <div>{infWorkerError.formation}</div>
 
         <CustomInput
-        disabled={isEnabled}
-        design={"inputDesign"}
-        type={"text"}
-        name={"experience"}
-        placeholder={""}
-        maxLength={"200"}
-        value={infWorker.experience}
-        functionProp={functionHandlerWorker}
-        functionBlur={errorCheckWorker}
-      />
-        <div>{infWorkerError.experience}</div>
+          disabled={true}
+          design={"inputDesign"}
+          type={"text"}
+          name={"experience"}
+          placeholder={""}
+          maxLength={"200"}
+          value={infWorker.experience}
+          functionProp={functionHandlerWorker}
+          functionBlur={errorCheckWorker}
+        />
       
-      </div>
+        <div>{infWorkerError.experience}</div>
+        </div>
     </div>
   );
 };

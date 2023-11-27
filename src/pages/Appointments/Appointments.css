@@ -1,6 +1,6 @@
 .appointmentDesign {
 
-    height: 90vh;
+    height: 86vh;
     width: 100vw;
 
     display: flex;
@@ -8,6 +8,5 @@
     justify-content: center;
     align-items: center;
 
-    background-color: rgb(245, 245, 27);
     gap: 1em;
 }

@@ -8,5 +8,14 @@
     justify-content: center;
     align-items: center;
 
-    background-color: beige;
+    background-color:whitesmoke;
 }
+
+  
+  .logoFamily {
+    transition: transform 0.3s ease;
+  }
+  
+  .imgLogo:hover .logoFamily {
+    transform: scale(1.1); 
+  }
