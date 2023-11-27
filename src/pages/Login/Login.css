@@ -22,7 +22,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  background-color: whitesmoke;
+  background-color: whitesmoke;  
   box-shadow: 0 2px 5px 0 rgba(213, 217, 217, .5);
   gap: 0.1em;
 }

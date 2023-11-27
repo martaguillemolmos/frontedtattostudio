@@ -3,11 +3,22 @@
 
     height: 90vh;
     width: 100vw;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: whitesmoke;
+    flex-wrap: nowrap;
+    gap: 2em;
 
-    background-color: beige;
+}
+
+.changeAppointment{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
 }

@@ -8,8 +8,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: beige;
-}
+    background-color: whitesmoke;}
 
 .deleteAccount{
     height: 2em;
@@ -48,7 +47,7 @@
     align-content: center;
     justify-content: center;
     align-items: center;
-    gap: 0.5em;
+    gap: 1.8em;
 }
 
 .MuiContainer-root {
@@ -94,3 +93,22 @@
     gap: 1.2em;
     margin-top: 1em;
  }
+
+ .passwordContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2em;
+ }
+
+.passwordButton{
+    color: blueviolet;
+}
+
+.passwordButton:hover{
+cursor: pointer;
+color: brown;
+}

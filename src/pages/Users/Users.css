@@ -4,8 +4,17 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    background-color: beige;
+    background-color:  whitesmoke;
+}
+
+.usersRoster{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    align-items: center;
 }

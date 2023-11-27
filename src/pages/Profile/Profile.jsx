@@ -262,10 +262,10 @@ export const Profile = () => {
        </Button>
       
       )}
-      <div>
-        <div className="password">
-          Contraseña
-          <LinkButton path={"/password"} title={"Modificar contraseña"} />
+      <div className="passwordContent">
+        Contraseña
+        <div className="passwordButton" onClick={() => navigate("/password")}>
+          Modificar contraseña
         </div>
       </div>
 

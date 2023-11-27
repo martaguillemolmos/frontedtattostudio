@@ -38,14 +38,17 @@ export const Header = () => {
     <div className="headerDesign">
       <div className="headerText">
         {/* Vistas públicas */}
-        <LinkButton path={"/"} title={"Inicio"} />
+        <div className="headerLogo">
+        <LinkButton className= "nameCompany" path={"/"} title={"Family Art Tatto"} />
+        </div>
+        <div className="headerContent">
         <LinkButton path={"/product"} title={"Productos"} />
         {/* Vistas si estás registrado o no*/}
         {/* No estás registrado */}
         {rdxToken.credentials == "" ? (
           <>
-            <LinkButton path={"/register"} title={"Registrarte"} />
-            <LinkButton path={"/login"} title={"Iniciar sesión"} />
+            <LinkButton className= "buttonHeader" path={"/register"} title={"Registrarte"} />
+            <LinkButton className= "buttonHeader" path={"/login"} title={"Iniciar sesión"} />
           </>
         ) : (
           <>
@@ -79,6 +82,7 @@ export const Header = () => {
             </div>
           </>
         )}
+        </div>
       </div>
     </div>
   );
