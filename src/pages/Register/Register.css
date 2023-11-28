@@ -43,3 +43,13 @@
   justify-content: center;
   align-items: center;
 }
+
+.divInputs{
+display: flex;
+gap: 0.4em !important;
+flex-direction: column;
+flex-wrap: nowrap;
+align-content: center;
+justify-content: center;
+align-items: center;
+}

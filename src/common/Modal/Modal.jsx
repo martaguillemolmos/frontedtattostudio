@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { userData } from "../../pages/userSlice";
 import dayjs from "dayjs";
 import { createAppointment } from "../../services/apiCalls";
+import { useNavigate } from "react-router-dom";
 // import { Calendar } from '@mantine/core';
 
 // Función para deshabilitar fines de semana
@@ -22,6 +23,8 @@ import { createAppointment } from "../../services/apiCalls";
 
 
 export const ExampleModal = ({ allProducts, productValue }) => {
+  const navigate = useNavigate();
+
   const searchWorkers = allProducts
     .filter((product) => product.product_id == productValue)
     .map((value) => ({
@@ -100,6 +103,7 @@ export const ExampleModal = ({ allProducts, productValue }) => {
 
       createAppointment(token, bodyAppointment)
         .then((resp) => {
+          navigate("/appointment/user");
           console.log(resp);
         })
         .catch((er) => console.log(er));
