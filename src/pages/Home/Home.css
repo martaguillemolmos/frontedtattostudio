@@ -8,12 +8,16 @@
     justify-content: center;
     align-items: center;
 
-    background-color:whitesmoke;
+    background-image:url(../../img/Home.png);
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
   
   .logoFamily {
     transition: transform 0.3s ease;
+    cursor: pointer;
   }
   
   .imgLogo:hover .logoFamily {

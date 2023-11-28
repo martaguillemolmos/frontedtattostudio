@@ -8,7 +8,7 @@ export const Home = () => {
           src="https://www.familyarttattoo.com/wp-content/uploads/2023/03/FAMILY_ART_new_logo.png"
           alt="Family Art Logo"
           className="logoFamily"
-          style={{ height: "30em", width: "30em" }}
+          style={{ height: "35em", width: "35em" }}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import "./Login.css";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CustomInput } from "../../common/CustomInput/CustomInput";
 import { logUser } from "../../services/apiCalls";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import Divider from "@mui/material/Divider";
 //Importo Redux
 
 import { useDispatch, useSelector } from "react-redux";
-import { login, userData } from "../userSlice";
+import { login, userData,  } from "../userSlice";
 import { SnackbarCustom } from "../../common/Snackbar/Snackbar";
 import { InputPassword } from "../../common/PasswordField/PasswordField";
 import { SimpleContainer } from "../../common/Container/Container";
@@ -98,7 +98,7 @@ export const Login = () => {
           console.log("Mensajito", resultado.data.message);
           setTimeout(() => {
             navigate("/profile");
-          }, 1000);
+          }, 2000);
         })
         .catch((error) => {
           if (error.response.status !== 200) {
